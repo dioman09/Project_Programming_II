@@ -76,12 +76,41 @@ public class Controller_View_Arranque implements Initializable {
         }
     }
 
+    public void run_signingUP() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/View_SigningUP.fxml"));
+            Parent root = loader.load();
+
+            Controller_View_SigningUP controller = loader.getController();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            stage.setScene(scene);
+
+            stage.setOnShown(event -> controller.getLabel_user().setText("User"));
+
+            stage.setOnCloseRequest((WindowEvent value) -> {
+                controller.run_arranque();
+            });
+
+            stage.show();
+
+            Stage miStage = (Stage) this.btn_login.getScene().getWindow();
+            miStage.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Controller_View_Arranque.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @FXML
     private void action_event(ActionEvent event) {
         if (event.getSource() == btn_admin) {
             run_login("Admin");
         } else if (event.getSource() == btn_login) {
             run_login("User");
+        } else if (event.getSource() == btn_signing_up) {
+            run_signingUP();
         }
     }
 

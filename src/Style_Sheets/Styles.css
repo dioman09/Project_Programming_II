@@ -3,6 +3,10 @@
     font-family: 'LibreBodoni';
     src: url('../fonts/LibreBodoni-Regular.ttf');
 }
+
+.label {
+    -fx-text-fill: #FFFFFF;
+}
 /*Global*/
 
 /*nav-bar*/

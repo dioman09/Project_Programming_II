@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Controller_View_Login implements Initializable {
 
@@ -43,18 +44,45 @@ public class Controller_View_Login implements Initializable {
     public void run_arranque() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/View_Arranque.fxml"));
-            Parent root = loader.load();            
+            Parent root = loader.load();
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
 
-            stage.setScene(scene);           
+            stage.setScene(scene);
             stage.show();
 
             Stage miStage = (Stage) this.btn_login.getScene().getWindow();
             miStage.close();
         } catch (IOException ex) {
             Logger.getLogger(Controller_View_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void run_signingUP(String type) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/View_SigningUP.fxml"));
+            Parent root = loader.load();
+
+            Controller_View_SigningUP controller = loader.getController();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            stage.setScene(scene);
+
+            stage.setOnShown(event -> controller.getLabel_user().setText(type));
+
+            stage.setOnCloseRequest((WindowEvent value) -> {
+                controller.run_login(type);
+            });
+
+            stage.show();
+
+            Stage miStage = (Stage) this.btn_login.getScene().getWindow();
+            miStage.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Controller_View_Arranque.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -72,6 +100,14 @@ public class Controller_View_Login implements Initializable {
 
     @FXML
     private void eventAction(ActionEvent event) {
+
+        if (event.getSource() == link_regist) {
+            if (ima_admin.isVisible()) {
+                run_signingUP("Admin");
+            } else {
+                run_signingUP("User");
+            }
+        }
     }
 
 }
