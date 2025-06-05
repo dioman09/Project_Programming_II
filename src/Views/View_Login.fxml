@@ -28,12 +28,12 @@
             </ImageView>
             <Group fx:id="ima_admin" layoutX="67.0" layoutY="-7.0" visible="false">
                <children>
-                  <ImageView fitHeight="117.0" fitWidth="117.0" layoutX="24.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="103.0" fitWidth="95.0" layoutX="34.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/Publics/Admin.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="161.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="146.0" fitWidth="147.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/Publics/Circle.png" />
                      </image>
