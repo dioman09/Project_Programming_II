@@ -1,8 +1,11 @@
+/*Global*/
 @font-face {
     font-family: 'LibreBodoni';
     src: url('../fonts/LibreBodoni-Regular.ttf');
 }
+/*Global*/
 
+/*nav-bar*/
 .linear-To-Right{
     -fx-background-color: linear-gradient(to right, #626262, #393939, #010101);
 }
@@ -22,3 +25,30 @@
 .image-radius{
     -fx-border-radius: 10;
 }
+/*nav-bar*/
+
+/*View_Login*/
+.textField{
+    -fx-background-color: #D9D9D9;
+    -fx-background-radius: 12 12 12 12;
+    -fx-border-radius: 12 12 12 12;
+    -fx-border-color: #FFFFFF;
+    -fx-prompt-text-fill: derive(#000000, -30%);
+    -fx-border-width: 2;
+}
+
+.btn_login{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12 12 12 12;
+    -fx-border-radius: 12 12 12 12;
+    -fx-border-color: #00D1FF;
+    -fx-font-weight: bold;
+    -fx-prompt-text-fill: derive(#000000, -30%);
+    -fx-border-width: 2;    
+}
+
+.link{
+    -fx-text-fill: #23AEFF;
+    -fx-background-color: linear-gradient(to top, #626262, #393939, #191919);
+}
+/*View_Login*/

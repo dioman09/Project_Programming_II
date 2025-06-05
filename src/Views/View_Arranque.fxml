@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="660.0" prefWidth="1120.0" stylesheets="@../Style_Sheets/Styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23" fx:controller="Controllers.Controller_View_Arranque">
+<AnchorPane prefHeight="660.0" prefWidth="1120.0" stylesheets="@../Style_Sheets/Styles.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller_View_Arranque">
    <children>
       <Pane prefHeight="330.0" prefWidth="1120.0" style="-fx-background-color: FFFFFF;">
          <children>
@@ -51,7 +51,7 @@
                <graphic>
                   <ImageView fx:id="ima_link_01" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Proyecto_Final-master/src/Images/Icons/git1.png" />
+                        <Image url="@../Images/Publics/GitHub.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -60,7 +60,7 @@
                <graphic>
                   <ImageView fx:id="ima_link_02" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Proyecto_Final-master/src/Images/Icons/whats1.png" />
+                        <Image url="@../Images/Publics/WhatsApp.png" />
                      </image>
                   </ImageView>
                </graphic>
