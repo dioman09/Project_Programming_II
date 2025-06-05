@@ -1,14 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller_View_Arranque">
-    <stylesheets>
-        <URL value="@/Style_Sheets/Styles.css"/>
-    </stylesheets>
+<AnchorPane prefHeight="660.0" prefWidth="1120.0" stylesheets="@../Style_Sheets/Styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23" fx:controller="Controllers.Controller_View_Arranque">
+   <children>
+      <Pane prefHeight="330.0" prefWidth="1120.0" style="-fx-background-color: FFFFFF;">
+         <children>
+            <Pane layoutX="524.0" layoutY="29.0" prefHeight="49.0" prefWidth="545.0" styleClass="linear-To-Right">
+               <children>
+                  <Button fx:id="btn_admin" alignment="CENTER_RIGHT" layoutY="5.0" mnemonicParsing="false" onAction="#action_event" prefHeight="39.0" prefWidth="100.0" styleClass="nav-button-home" text="Admin">
+                     <font>
+                        <Font name="Georgia" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btn_signing_up" layoutX="265.0" layoutY="5.0" mnemonicParsing="false" onAction="#action_event" prefHeight="39.0" prefWidth="142.0" styleClass="nav-button-home" text="Signing up">
+                     <font>
+                        <Font name="Georgia" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="btn_login" layoutX="431.0" layoutY="5.0" mnemonicParsing="false" onAction="#action_event" prefHeight="39.0" prefWidth="100.0" styleClass="nav-button-home" text="Login">
+                     <font>
+                        <Font name="Georgia" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane layoutY="330.0" prefHeight="330.0" prefWidth="1120.0" styleClass="linear-To-Right">
+         <children>
+            <Button fx:id="link_01" layoutX="15.0" layoutY="55.0" mnemonicParsing="false" onAction="#irLink" prefHeight="55.0" prefWidth="55.0" styleClass="link-button">
+               <graphic>
+                  <ImageView fx:id="ima_link_01" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Proyecto_Final-master/src/Images/Icons/git1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="link_02" layoutX="15.0" layoutY="180.0" mnemonicParsing="false" onAction="#irLink" prefHeight="55.0" prefWidth="55.0" styleClass="link-button">
+               <graphic>
+                  <ImageView fx:id="ima_link_02" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Proyecto_Final-master/src/Images/Icons/whats1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <AnchorPane layoutX="91.0" layoutY="99.0" prefHeight="499.0" prefWidth="1029.0" style="-fx-background-color: FFFFFF;">
+         <children>
+            <ImageView fitHeight="503.0" fitWidth="506.0" layoutX="526.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Publics/Image.jpg" />
+               </image>
+            </ImageView>
+            <Pane layoutX="6.0" prefHeight="503.0" prefWidth="520.0" style="-fx-background-color: FFFFFF;">
+               <children>
+                  <Text layoutX="66.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="auténtico yo. ¡Viste con confianza, vive con">
+                     <font>
+                        <Font name="Georgia" size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="66.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pasión!">
+                     <font>
+                        <Font name="Georgia" size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="65.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descubre tu mejor versión con cada compra. Cada">
+                     <font>
+                        <Font name="Georgia" size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="65.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="prenda es una oportunidad para expresar tu">
+                     <font>
+                        <Font name="Georgia" size="15.0" />
+                     </font>
+                  </Text>
+                  <Circle fill="WHITE" layoutX="540.0" layoutY="110.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Circle fill="WHITE" layoutX="521.0" layoutY="366.0" radius="30.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Polygon fill="WHITE" layoutX="530.0" layoutY="40.0" points="-50.0, 40.0, 35.0, 53.0, -23.0, -17.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Polygon fill="WHITE" layoutX="530.0" layoutY="396.0" points="-41.0, 61.0, -50.0, -19.0, 13.94110107421875, -10.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Polygon fill="WHITE" layoutX="540.0" layoutY="267.0" points="-41.0, 61.0, -50.0, -19.0, 8.0, 85.0" stroke="WHITE" strokeType="INSIDE" />
+                  <Polygon fill="WHITE" layoutX="544.0" layoutY="149.0" points="-69.0, -21.0, -54.0, 40.0, 20.0, -21.0" stroke="WHITE" strokeType="INSIDE" />
+                  <ImageView fitHeight="330.0" fitWidth="332.0" layoutX="66.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" styleClass="image-radius">
+                     <image>
+                        <Image url="@../Images/Men_Images/Product_1_01.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <Pane prefHeight="158.0" prefWidth="251.0" style="-fx-background-color: FFFFFF;">
+         <children>
+            <ImageView fitHeight="144.0" fitWidth="219.0" layoutX="23.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Publics/Logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
