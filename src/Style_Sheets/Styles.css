@@ -1,3 +1,24 @@
-.mainFxmlClass {
+@font-face {
+    font-family: 'LibreBodoni';
+    src: url('../fonts/LibreBodoni-Regular.ttf');
+}
 
+.linear-To-Right{
+    -fx-background-color: linear-gradient(to right, #626262, #393939, #010101);
+}
+
+.link-button{
+    -fx-background-color: #616161;
+}
+
+.nav-button-home{
+    -fx-background-color: #CACDCE;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-family: 'LibreBodoni';
+    -fx-font-weight: bold;
+}
+
+.image-radius{
+    -fx-border-radius: 10;
 }
