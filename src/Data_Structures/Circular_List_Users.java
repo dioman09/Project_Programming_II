@@ -4,6 +4,13 @@ import Models.Admin;
 import Models.Client;
 import Models.Node_User;
 import Models.User;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
@@ -32,6 +39,10 @@ public class Circular_List_Users {
         return head == null;
     }
 
+    public void clean() {
+        head = null;
+    }
+
     public void Alert(Alert.AlertType alertType, String tit, String mj) {
         Alert a = new Alert(alertType);
         a.setTitle(tit);
@@ -40,7 +51,7 @@ public class Circular_List_Users {
     }
 
     public User searchByEmail(String email) {
-        if (isEmpty()) {            
+        if (isEmpty()) {
             return null;
         }
 
@@ -68,7 +79,7 @@ public class Circular_List_Users {
             newNode.setFormer(last);
             newNode.setNext(head);
             head.setFormer(newNode);
-        }                
+        }
     }
 
     public void addNodeUser(TextField txt_name, TextField txt_email, TextField txt_phone, ComboBox comb_sex, PasswordField txt_password, Label label_user) {
@@ -83,7 +94,7 @@ public class Circular_List_Users {
     public User createUser(TextField txt_name, TextField txt_email, TextField txt_phone, ComboBox comb_sex, PasswordField txt_password, Label label_user) {
 
         User search = searchByEmail(txt_email.getText());
-        
+
         try {
             if (search != null) {
                 Alert(Alert.AlertType.WARNING, "Importante..!",
@@ -112,6 +123,132 @@ public class Circular_List_Users {
         } catch (NumberFormatException e) {
             Logger.getLogger(Circular_List_Users.class.getName()).log(Level.SEVERE, null, e);
             return null;
+        }
+    }
+
+    public void save() {
+        save_information_in_user_file_ADMINS();
+        save_information_in_user_file_CLIENTS();
+    }
+
+    public void take() {
+        take_data_from_user_file_ADMINS();
+        take_data_from_user_file_CLIENTS();
+    }
+
+    public void save_information_in_user_file_ADMINS() {
+
+        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_admins.txt";
+
+        Path archivo = Paths.get(direccion);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo.toFile(), false))) {
+            Node_User current = head;
+
+            do {
+                if (current.getUser() instanceof Admin) {
+                    writer.write(current.getUser().getName() + ". ");
+                    writer.write(current.getUser().getSex() + ". ");
+                    writer.write(current.getUser().getEmail() + ". ");
+                    writer.write(current.getUser().getPhone_number() + ". ");
+                    writer.write(current.getUser().getPassword());
+
+                    writer.newLine();
+                }
+
+                current = current.getNext();
+            } while (current != head);
+        } catch (IOException e) {
+            Logger.getLogger(Circular_List_Users.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    public void take_data_from_user_file_ADMINS() {
+
+        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_admins.txt";
+
+        Path file = Paths.get(direccion);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file.toFile()))) {
+
+            String line;
+
+            clean();
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] elements = line.split(". ");
+
+                String name = elements[0];
+                String sex = elements[1];
+                String email = elements[2];
+                long phone_number = Long.parseLong(elements[3]);
+                String password = elements[4];
+
+                User user = new Admin(name, sex, email, password, phone_number);
+
+                addToEnd(user);
+            }
+        } catch (IOException e) {
+            Logger.getLogger(Circular_List_Users.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    public void save_information_in_user_file_CLIENTS() {
+
+        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_clients.txt";
+
+        Path archivo = Paths.get(direccion);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo.toFile(), false))) {
+            Node_User current = head;
+
+            do {
+                if (current.getUser() instanceof Client) {
+                    writer.write(current.getUser().getName() + ". ");
+                    writer.write(current.getUser().getSex() + ". ");
+                    writer.write(current.getUser().getEmail() + ". ");
+                    writer.write(current.getUser().getPhone_number() + ". ");
+                    writer.write(current.getUser().getPassword());
+
+                    writer.newLine();
+                }
+
+                current = current.getNext();
+            } while (current != head);
+        } catch (IOException e) {
+            Logger.getLogger(Circular_List_Users.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    public void take_data_from_user_file_CLIENTS() {
+
+        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_clients.txt";
+
+        Path file = Paths.get(direccion);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file.toFile()))) {
+
+            String line;
+
+            clean();
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] elements = line.split(". ");
+
+                String name = elements[0];
+                String sex = elements[1];
+                String email = elements[2];
+                long phone_number = Long.parseLong(elements[3]);
+                String password = elements[4];
+
+                User user = new Client(name, sex, email, password, phone_number);
+
+                addToEnd(user);
+            }
+        } catch (IOException e) {
+            Logger.getLogger(Circular_List_Users.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
