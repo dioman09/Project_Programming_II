@@ -1,5 +1,7 @@
 package Controllers;
 
+import Data_Structures.Circular_List_Users;
+import Data_Structures.Data_Singleton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +25,8 @@ import javafx.stage.WindowEvent;
 
 public class Controller_View_Login implements Initializable {
 
+    private final Circular_List_Users list_users = Data_Singleton.getInstance().getList_users();
+    
     @FXML
     private ImageView ima_user;
     @FXML

@@ -147,10 +147,10 @@ public class Circular_List_Users {
 
             do {
                 if (current.getUser() instanceof Admin) {
-                    writer.write(current.getUser().getName() + ". ");
-                    writer.write(current.getUser().getSex() + ". ");
-                    writer.write(current.getUser().getEmail() + ". ");
-                    writer.write(current.getUser().getPhone_number() + ". ");
+                    writer.write(current.getUser().getName() + " - ");
+                    writer.write(current.getUser().getSex() + " - ");
+                    writer.write(current.getUser().getEmail() + " - ");
+                    writer.write(current.getUser().getPhone_number() + " - ");
                     writer.write(current.getUser().getPassword());
 
                     writer.newLine();
@@ -177,7 +177,7 @@ public class Circular_List_Users {
 
             while ((line = reader.readLine()) != null) {
 
-                String[] elements = line.split(". ");
+                String[] elements = line.split(" - ");
 
                 String name = elements[0];
                 String sex = elements[1];
@@ -205,10 +205,10 @@ public class Circular_List_Users {
 
             do {
                 if (current.getUser() instanceof Client) {
-                    writer.write(current.getUser().getName() + ". ");
-                    writer.write(current.getUser().getSex() + ". ");
-                    writer.write(current.getUser().getEmail() + ". ");
-                    writer.write(current.getUser().getPhone_number() + ". ");
+                    writer.write(current.getUser().getName() + " - ");
+                    writer.write(current.getUser().getSex() + " - ");
+                    writer.write(current.getUser().getEmail() + " - ");
+                    writer.write(current.getUser().getPhone_number() + " - ");
                     writer.write(current.getUser().getPassword());
 
                     writer.newLine();
@@ -235,7 +235,7 @@ public class Circular_List_Users {
 
             while ((line = reader.readLine()) != null) {
 
-                String[] elements = line.split(". ");
+                String[] elements = line.split(" - ");
 
                 String name = elements[0];
                 String sex = elements[1];

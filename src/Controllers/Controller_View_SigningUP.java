@@ -124,6 +124,7 @@ public class Controller_View_SigningUP implements Initializable {
                             if (txt_password.getText().equals(txt_passwordC.getText())) {
                                 
                                 list_users.addNodeUser(txt_name, txt_email, txt_phone, comb_sex, txt_password, label_user);
+                                list_users.save();
                                 run_login(label_user.getText());                                
                             } else {
                                 a.setContentText("Verifique su contraseña.");
