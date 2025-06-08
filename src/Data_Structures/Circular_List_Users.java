@@ -127,34 +127,25 @@ public class Circular_List_Users {
     }
 
     public void save() {
-        save_information_in_user_file_ADMINS();
-        save_information_in_user_file_CLIENTS();
+        save_information_in_user_file();
     }
 
     public void take() {
-        take_data_from_user_file_ADMINS();
-        take_data_from_user_file_CLIENTS();
+        take_data_from_user_file();
     }
 
-    public void save_information_in_user_file_ADMINS() {
+    public void save_information_in_user_file() {
 
-        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_admins.txt";
+        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_users.txt";
 
         Path archivo = Paths.get(direccion);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo.toFile(), false))) {
             Node_User current = head;
 
-            do {
-                if (current.getUser() instanceof Admin) {
-                    writer.write(current.getUser().getName() + " - ");
-                    writer.write(current.getUser().getSex() + " - ");
-                    writer.write(current.getUser().getEmail() + " - ");
-                    writer.write(current.getUser().getPhone_number() + " - ");
-                    writer.write(current.getUser().getPassword());
-
-                    writer.newLine();
-                }
+            do {                
+                writer.write(current.getUser().toFileString());
+                writer.newLine();
 
                 current = current.getNext();
             } while (current != head);
@@ -163,9 +154,9 @@ public class Circular_List_Users {
         }
     }
 
-    public void take_data_from_user_file_ADMINS() {
+    public void take_data_from_user_file() {
 
-        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_admins.txt";
+        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_users.txt";
 
         Path file = Paths.get(direccion);
 
@@ -177,73 +168,7 @@ public class Circular_List_Users {
 
             while ((line = reader.readLine()) != null) {
 
-                String[] elements = line.split(" - ");
-
-                String name = elements[0];
-                String sex = elements[1];
-                String email = elements[2];
-                long phone_number = Long.parseLong(elements[3]);
-                String password = elements[4];
-
-                User user = new Admin(name, sex, email, password, phone_number);
-
-                addToEnd(user);
-            }
-        } catch (IOException e) {
-            Logger.getLogger(Circular_List_Users.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
-
-    public void save_information_in_user_file_CLIENTS() {
-
-        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_clients.txt";
-
-        Path archivo = Paths.get(direccion);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo.toFile(), false))) {
-            Node_User current = head;
-
-            do {
-                if (current.getUser() instanceof Client) {
-                    writer.write(current.getUser().getName() + " - ");
-                    writer.write(current.getUser().getSex() + " - ");
-                    writer.write(current.getUser().getEmail() + " - ");
-                    writer.write(current.getUser().getPhone_number() + " - ");
-                    writer.write(current.getUser().getPassword());
-
-                    writer.newLine();
-                }
-
-                current = current.getNext();
-            } while (current != head);
-        } catch (IOException e) {
-            Logger.getLogger(Circular_List_Users.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
-
-    public void take_data_from_user_file_CLIENTS() {
-
-        String direccion = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_clients.txt";
-
-        Path file = Paths.get(direccion);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file.toFile()))) {
-
-            String line;
-
-            clean();
-
-            while ((line = reader.readLine()) != null) {
-
-                String[] elements = line.split(" - ");
-
-                String name = elements[0];
-                String sex = elements[1];
-                String email = elements[2];
-                long phone_number = Long.parseLong(elements[3]);
-                String password = elements[4];
-
-                User user = new Client(name, sex, email, password, phone_number);
+                User user = User.parseUser(line);
 
                 addToEnd(user);
             }

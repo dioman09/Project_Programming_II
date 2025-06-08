@@ -1,12 +1,12 @@
 package Models;
 
-public class User {
-    
+public abstract class User {
+
     protected String name;
     protected String sex;
     protected String email;
-    protected String password;    
-    protected long phone_number;    
+    protected String password;
+    protected long phone_number;
 
     public User(String name, String sex, String email, String password, long phone_number) {
         this.name = name;
@@ -54,5 +54,22 @@ public class User {
 
     public void setPhone_number(long phone_number) {
         this.phone_number = phone_number;
-    }        
+    }
+
+    public static User parseUser(String line) {
+        if (line.startsWith("\\ADMIN")) {
+            Admin admin = new Admin();
+            admin.fromFileString(line);
+            return admin;
+        } else if (line.startsWith("\\CLIENT")) {
+            Client client = new Client();
+            client.fromFileString(line);
+            return client;
+        }
+        return null;
+    }
+
+    public abstract String toFileString();
+
+    public abstract User fromFileString(String line);
 }
