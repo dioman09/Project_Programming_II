@@ -4,7 +4,7 @@
     src: url('../fonts/LibreBodoni-Regular.ttf');
 }
 
-.label {
+#label {
     -fx-text-fill: #FFFFFF;
 }
 /*Global*/
@@ -26,6 +26,20 @@
     -fx-font-weight: bold;
 }
 
+.nav-button-catalog{
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-background-color: #A8A8A8;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-family: 'LibreBodoni';
+    -fx-font-weight: bold;
+}
+
+.style-items{
+
+}
+
 .image-radius{
     -fx-border-radius: 10;
 }
@@ -34,8 +48,8 @@
 /*View_Login*/
 .textField{
     -fx-background-color: #D9D9D9;
-    -fx-background-radius: 12 12 12 12;
-    -fx-border-radius: 12 12 12 12;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
     -fx-border-color: #FFFFFF;
     -fx-prompt-text-fill: derive(#000000, -30%);
     -fx-border-width: 2;
@@ -43,12 +57,12 @@
 
 .btn_login{
     -fx-background-color: #FFFFFF;
-    -fx-background-radius: 12 12 12 12;
-    -fx-border-radius: 12 12 12 12;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
     -fx-border-color: #00D1FF;
     -fx-font-weight: bold;
     -fx-prompt-text-fill: derive(#000000, -30%);
-    -fx-border-width: 2;    
+    -fx-border-width: 2;
 }
 
 .link{
@@ -56,3 +70,100 @@
     -fx-background-color: linear-gradient(to top, #626262, #393939, #191919);
 }
 /*View_Login*/
+
+/*View_Catalog_Home*/
+.btn-add{
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 10;
+}
+
+.btn-add .text {
+    -fx-fill: #030303;
+    -fx-font-weight: bold;
+}
+
+.btn-icon{
+    -fx-pref-width: 50;
+    -fx-pref-height: 35px;
+    -fx-border-radius: 30;
+    -fx-background-color:  none;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 1.5;
+}
+
+.btn-icon .image-view{
+    -fx-border-radius: 10;
+    -fx-background-color: transparent;
+}
+
+.btn-icon:hover{
+    -fx-border-radius: 25;
+    -fx-opacity: 0.8;
+    -fx-cursor: hand;
+    -fx-border-width: 2.5;
+}
+
+.btn-icon:pressed{
+    -fx-cursor: closed_hand;
+}
+
+.panel-container{
+    -fx-background-color: #C5EAFF;
+    -fx-background-radius: 10;
+}
+
+.panel-container #label-black{
+    -fx-fill: #000000;
+}
+
+.panel-view{
+    -fx-background-radius: 20;
+    -fx-background-color: whitesmoke;
+}
+
+.combo-box {
+    -fx-appearance: none;
+}
+
+.combo-box .content-input {
+    -fx-max-width: 50px;
+    -fx-position: relative;
+    -fx-font-family: 'Montserrat', sans-serif;
+}
+
+.combo-box .text{
+    -fx-font-weight: bold;
+}
+
+.combo-box .text-input {
+    -fx-padding: 4 8 0 0;
+    -fx-font-size: 1em;
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #7b7b7b;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-cursor: hand;
+    -fx-alignment: center-left;
+}
+
+.combo-box:hover .text-input {
+    -fx-background-color: #B1E8CD;
+}
+
+.combo-box .arrow-button .arrow {
+    -fx-shape: "M0 0 L1 0 L0.5 1 Z";
+    -fx-background-color: #000000;
+    -fx-rotate: 135;
+    -fx-size: 16px;
+    -fx-margin-right: 20px;
+    -fx-margin-top: -3px;
+    -fx-transition: transform 0.25s ease;
+}
+
+.combo-box:hover .arrow-button .arrow {
+    -fx-rotate: 45;
+}
+
+/*View_Catalog_Home*/
+

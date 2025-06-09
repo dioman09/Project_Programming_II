@@ -40,12 +40,12 @@
                   </ImageView>
                </children>
             </Group>
-            <Label layoutX="17.0" layoutY="139.0" text="Correo electronico" />
+            <Label id="label" layoutX="17.0" layoutY="139.0" text="Correo electronico" />
             <TextField fx:id="txt_email" focusTraversable="false" layoutX="16.0" layoutY="162.0" onKeyTyped="#eventKey" prefHeight="25.0" prefWidth="268.0" promptText="Usuario" styleClass="textField" />
-            <Label layoutX="20.0" layoutY="199.0" text="Contraseña" />
+            <Label id="label" layoutX="20.0" layoutY="199.0" text="Contraseña" />
             <PasswordField fx:id="txt_password" focusTraversable="false" layoutX="15.0" layoutY="222.0" onKeyTyped="#eventKey" prefHeight="29.0" prefWidth="268.0" promptText="***************" styleClass="textField" />
             <Button fx:id="btn_login" layoutX="50.0" layoutY="259.0" mnemonicParsing="false" onAction="#eventAction" prefHeight="29.0" prefWidth="201.0" styleClass="btn_login" stylesheets="@../Styles/Style.css" text="INGRESAR" />
-            <Label layoutX="22.0" layoutY="303.0" text="¿Nuevo usuario?" />
+            <Label id="label" layoutX="22.0" layoutY="303.0" text="¿Nuevo usuario?" />
             <Hyperlink fx:id="link_regist" cursor="$null" focusTraversable="false" layoutX="119.0" layoutY="300.0" onAction="#eventAction" prefWidth="89.0" styleClass="link" stylesheets="@../Styles/Style.css" text="Registrese aquí" textFill="#23aeff" />
          </children>
          <opaqueInsets>
