@@ -6,8 +6,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,11 +16,13 @@ public class Stacks_Products {
     private final Stack<Product> products_carShop;
     private final Stack<Product> products_purchaseHistory;
     private final Stack<Product> products_shipped;
+    private final Stack<Product> products_all;
 
     public Stacks_Products() {
         this.products_carShop = new Stack<>();
         this.products_purchaseHistory = new Stack<>();
         this.products_shipped = new Stack<>();
+        this.products_all = new Stack<>();
     }
 
     public Stack<Product> getProducts_carShop() {
@@ -37,39 +37,41 @@ public class Stacks_Products {
         return products_shipped;
     }
 
-    public void setPushProduct(Product product) {
-        int pos = products_carShop.indexOf(product);
-        if (pos == -1) {
-            products_carShop.push(product);
+    public Stack<Product> getProducts_all() {
+        return products_all;
+    }
+
+    public void pushProduct(Stack<Product> stack, Product product) {
+        if (!stack.contains(product)) {
+            stack.push(product);
         } else {
             System.out.println("Este producto ya se encuentra registrado.");
         }
     }
 
-    public Stack<Product> getProductsEmail(String email) {
-        Stack<Product> pila = new Stack<>();
-        for (Product aux : products_carShop) {
-            if (aux.getEmail_buyer().equals(email)) {
-                pila.push(aux);
-            }
-        }
-        return pila;
-    }
-
-    public Product getProductEmail(String email) {
-        for (Product aux : products_carShop) {
-            if (aux.getEmail_buyer().equals(email)) {
-                return aux;
+    public Product search_product_by_email_and_id(Stack<Product> stack, String email, String id) {
+        for (Product product : stack) {
+            if (product.getEmail_buyer().equals(email) && id.equals(product.getId())) {
+                return product;
             }
         }
         return null;
     }
 
-    public void setPopProductEmail(String email) {
-        Product aux = null;
-        if (!products_carShop.empty()) {
-            aux = getProductEmail(email);
-            if ((aux != null) && (products_carShop.remove(aux))) {
+    public Stack<Product> getProductsByEmail(Stack<Product> stack, String email) {
+        Stack<Product> filtered = new Stack<>();
+        for (Product product : stack) {
+            if (product.getEmail_buyer().equals(email)) {
+                filtered.push(product);
+            }
+        }
+        return filtered;
+    }
+
+    public void remove_product_by_email_and_id(Stack<Product> stack, String email, String id) {
+        Product product = search_product_by_email_and_id(stack, email, id);
+        if (!stack.isEmpty()) {
+            if (product != null && stack.remove(product)) {
                 JOptionPane.showMessageDialog(null, "Producto eliminado!");
             } else {
                 JOptionPane.showMessageDialog(null, "El producto no existe!");
@@ -79,39 +81,18 @@ public class Stacks_Products {
         }
     }
 
-    public Stack<Product> getClonarProductsStack() {
-        Stack<Product> caux = new Stack<>();
-        int i;
-        Product aux = null;
-        if (products_carShop == null) {
-            return null;
-        } else {
-            for (i = 0; i < products_carShop.size(); i++) {
-                aux = products_carShop.get(i);
-                caux.add(i, aux);
+    public Stack<Product> cloneStack(Stack<Product> stack) {
+        return new Stack<Product>() {
+            {
+                addAll(stack);
             }
-            return caux;
-        }
+        };
     }
 
-    public void save() {
-        save_data_in_carShop_file();
-    }
-
-    public void take() {
-        take_data_from_carShop_file();
-    }
-
-    private void save_data_in_carShop_file() {
-
-        String url = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_carShop.txt";
-
-        Path path = Paths.get(url);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile(), false))) {
-            Stack<Product> products = products_carShop;
-
-            for (Product product : products) {
+    public void saveStackToFile(Stack<Product> stack, String filename) {
+        String path = System.getProperty("user.dir") + "\\src\\Text_Files\\" + filename;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, false))) {
+            for (Product product : stack) {
                 writer.write(product.toFileString());
                 writer.newLine();
             }
@@ -120,29 +101,51 @@ public class Stacks_Products {
         }
     }
 
-    private void take_data_from_carShop_file() {
-
-        String url = System.getProperty("user.dir") + "\\src\\Text_Files\\Data_carShop.txt";
-
-        Path path = Paths.get(url);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
-
+    public void loadStackFromFile(Stack<Product> stack, String filename) {
+        String path = System.getProperty("user.dir") + "\\src\\Text_Files\\" + filename;
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
-
-            if (!products_carShop.isEmpty()) {
-                products_carShop.clear();
-            }
-
+            stack.clear();
             while ((line = reader.readLine()) != null) {
-
                 Product product = Product.fromFileString(line);
-
-                setPushProduct(product);
+                if (product != null) {
+                    stack.push(product);
+                }
             }
         } catch (IOException e) {
             Logger.getLogger(Stacks_Products.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
+    public void saveCarShop() {
+        saveStackToFile(products_carShop, "Data_carShop.txt");
+    }
+
+    public void loadCarShop() {
+        loadStackFromFile(products_carShop, "Data_carShop.txt");
+    }
+
+    public void savePurchaseHistory() {
+        saveStackToFile(products_purchaseHistory, "Data_history.txt");
+    }
+
+    public void loadPurchaseHistory() {
+        loadStackFromFile(products_purchaseHistory, "Data_history.txt");
+    }
+
+    public void saveShipped() {
+        saveStackToFile(products_shipped, "Data_shipped.txt");
+    }
+
+    public void loadShipped() {
+        loadStackFromFile(products_shipped, "Data_shipped.txt");
+    }
+
+    public void saveAll() {
+        saveStackToFile(products_all, "Data_products.txt");
+    }
+
+    public void loadAll() {
+        loadStackFromFile(products_all, "Data_products.txt");
+    }
 }
