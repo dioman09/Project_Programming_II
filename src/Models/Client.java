@@ -26,16 +26,16 @@ public class Client extends User {
     public User fromFileString(String line) {
         String[] parts = line.split(" - ");
         
-        if (parts.length < 5) {
+        if (parts.length < 6) {
             throw new IllegalArgumentException("Formato incorrecto en línea: " + line);
         }
         
         Client client = new Client();
-        client.setName(parts[0]);
-        client.setSex(parts[1]);
-        client.setEmail(parts[2]);
-        client.setPassword(parts[3]);
-        client.setPhone_number(Long.parseLong(parts[4]));        
+        client.setName(parts[1]);
+        client.setSex(parts[2]);
+        client.setEmail(parts[3]);
+        client.setPassword(parts[4]);
+        client.setPhone_number(Long.parseLong(parts[5]));        
         
         return client;
     }

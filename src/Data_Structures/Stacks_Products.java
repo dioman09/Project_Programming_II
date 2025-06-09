@@ -57,7 +57,17 @@ public class Stacks_Products {
         }
         return null;
     }
-
+    
+    public Stack<Product> getProductsBySex(Stack<Product> stack, String sex) {
+        Stack<Product> filtered = new Stack<>();
+        for (Product product : stack) {
+            if (product.getSex().equals(sex)) {
+                filtered.push(product);
+            }
+        }
+        return filtered;
+    }
+    
     public Stack<Product> getProductsByEmail(Stack<Product> stack, String email) {
         Stack<Product> filtered = new Stack<>();
         for (Product product : stack) {
@@ -106,7 +116,7 @@ public class Stacks_Products {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
             stack.clear();
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {                
                 Product product = Product.fromFileString(line);
                 if (product != null) {
                     stack.push(product);

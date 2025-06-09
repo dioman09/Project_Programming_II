@@ -26,16 +26,16 @@ public class Admin extends User {
     public User fromFileString(String line) {
         String[] parts = line.split(" - ");
 
-        if (parts.length < 5) {
+        if (parts.length < 6) {
             throw new IllegalArgumentException("Formato incorrecto en línea: " + line);
         }
 
         Admin admin = new Admin();
-        admin.setName(parts[0]);
-        admin.setSex(parts[1]);
-        admin.setEmail(parts[2]);
-        admin.setPassword(parts[3]);
-        admin.setPhone_number(Long.parseLong(parts[4]));
+        admin.setName(parts[1]);
+        admin.setSex(parts[2]);
+        admin.setEmail(parts[3]);
+        admin.setPassword(parts[4]);
+        admin.setPhone_number(Long.parseLong(parts[5]));
 
         return admin;
     }

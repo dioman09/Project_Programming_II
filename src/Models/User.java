@@ -57,13 +57,13 @@ public abstract class User {
     }
 
     public static User parseUser(String line) {
-        if (line.startsWith("\\ADMIN")) {
+        if (line.startsWith("ADMIN")) {
             Admin admin = new Admin();
-            admin.fromFileString(line);
+            admin = (Admin) admin.fromFileString(line);
             return admin;
-        } else if (line.startsWith("\\CLIENT")) {
+        } else if (line.startsWith("CLIENT")) {
             Client client = new Client();
-            client.fromFileString(line);
+            client = (Client) client.fromFileString(line);
             return client;
         }
         return null;

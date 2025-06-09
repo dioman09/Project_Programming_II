@@ -2,6 +2,7 @@ package Controllers;
 
 import Data_Structures.Circular_List_Users;
 import Data_Structures.Data_Singleton;
+import Data_Structures.Stacks_Products;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +23,7 @@ import javafx.stage.WindowEvent;
 public class Controller_View_Arranque implements Initializable {
 
     private final Circular_List_Users list_users = Data_Singleton.getInstance().getList_users();
+    private final Stacks_Products stacks_products = Data_Singleton.getInstance().getStacks();
     
     @FXML
     private Button btn_admin;
@@ -53,6 +55,7 @@ public class Controller_View_Arranque implements Initializable {
         link_02.setOnMouseExited(event -> ima_link_02.setImage(imageNormal_));
         
         list_users.take();
+        stacks_products.loadAll();
     }
 
     public void run_login(String type) {

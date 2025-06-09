@@ -19,8 +19,430 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="660.0" prefWidth="1120.0" stylesheets="@../Style_Sheets/Styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23" fx:controller="Controllers.Controller_View_Catalog_Home">
+<AnchorPane prefHeight="660.0" prefWidth="1120.0" stylesheets="@../Style_Sheets/Styles.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Controller_View_Catalog_Home">
    <children>
+      <GridPane fx:id="container_catalog" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#pVisible" prefHeight="470.0" prefWidth="869.0" style="-fx-background-color: #F5F5EE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Pane fx:id="father_1" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container">
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
+               <children>
+                  <Pane fx:id="img1" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </Pane>
+                  <Button fx:id="btn_add_car_shop_1" focusTraversable="false" layoutX="64.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_car_shop" styleClass="btn-add" text="AGREGAR AL CARRITO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="cmb_size_1" focusTraversable="false" layoutX="103.0" layoutY="223.0" prefWidth="150.0" promptText="Seleccione su talla">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <Label id="label-black" layoutX="35.0" layoutY="227.0" text="TALLA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="13.0" layoutY="183.0" text="MARCA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="119.0" layoutY="202.0" text="GÉNERO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="119.0" layoutY="182.0" text="TIPO: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="14.0" layoutY="203.0" text="PRECIO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_brand_1" layoutX="67.0" layoutY="183.0" text="NIKE" />
+                  <Label fx:id="lbl_name_1" layoutX="159.0" layoutY="182.0" text="TIPO" />
+                  <Label fx:id="lbl_price_1" layoutX="67.0" layoutY="204.0" text="000000" />
+                  <Label fx:id="lbl_sex_1" layoutX="179.0" layoutY="202.0" text="NULL" />
+               </children>
+            </Pane>
+            <Pane fx:id="father_5" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
+               <children>
+                  <Pane fx:id="img5" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </Pane>
+                  <Button fx:id="btn_add_car_shop_5" focusTraversable="false" layoutX="61.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_car_shop" styleClass="btn-add" text="AGREGAR AL CARRITO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="cmb_size_5" focusTraversable="false" layoutX="100.0" layoutY="223.0" prefWidth="150.0" promptText="Seleccione su talla">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <Label id="label-black" layoutX="42.0" layoutY="227.0" text="TALLA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="15.0" layoutY="182.0" text="MARCA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="121.0" layoutY="200.0" text="GÉNERO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="121.0" layoutY="182.0" text="TIPO: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="16.0" layoutY="200.0" text="PRECIO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_brand_5" layoutX="69.0" layoutY="182.0" text="NIKE" />
+                  <Label fx:id="lbl_name_5" layoutX="161.0" layoutY="183.0" text="TIPO" />
+                  <Label fx:id="lbl_price_5" layoutX="69.0" layoutY="200.0" text="000000" />
+                  <Label fx:id="lbl_sex_5" layoutX="181.0" layoutY="201.0" text="NULL" />
+               </children>
+            </Pane>
+            <Pane fx:id="father_2" layoutX="18.0" layoutY="18.0" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
+               <children>
+                  <Pane fx:id="img2" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="249.0" styleClass="panel-view">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </Pane>
+                  <Button fx:id="btn_add_car_shop_2" focusTraversable="false" layoutX="64.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_car_shop" styleClass="btn-add" text="AGREGAR AL CARRITO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="cmb_size_2" focusTraversable="false" layoutX="105.0" layoutY="223.0" prefWidth="150.0" promptText="Seleccione su talla" styleClass="combo-box">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <Label id="label-black" layoutX="40.0" layoutY="227.0" text="TALLA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="19.0" layoutY="183.0" text="MARCA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="127.0" layoutY="203.0" text="GÉNERO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="127.0" layoutY="183.0" text="TIPO: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="19.0" layoutY="203.0" text="PRECIO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_brand_2" layoutX="73.0" layoutY="183.0" text="NIKE" />
+                  <Label fx:id="lbl_name_2" layoutX="167.0" layoutY="184.0" text="TIPO" />
+                  <Label fx:id="lbl_price_2" layoutX="73.0" layoutY="203.0" text="000000" />
+                  <Label fx:id="lbl_sex_2" layoutX="187.0" layoutY="203.0" text="NULL" />
+               </children>
+            </Pane>
+            <Pane fx:id="father_3" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
+               <children>
+                  <Pane fx:id="img3" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </Pane>
+                  <Button fx:id="btn_add_car_shop_3" focusTraversable="false" layoutX="64.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_car_shop" styleClass="btn-add" text="AGREGAR AL CARRITO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="cmb_size_3" focusTraversable="false" layoutX="104.0" layoutY="223.0" prefWidth="150.0" promptText="Seleccione su talla">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <Label id="label-black" layoutX="39.0" layoutY="227.0" text="TALLA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="17.0" layoutY="181.0" text="MARCA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="128.0" layoutY="201.0" text="GÉNERO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="128.0" layoutY="181.0" text="TIPO: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="18.0" layoutY="201.0" text="PRECIO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_brand_3" layoutX="71.0" layoutY="181.0" text="NIKE" />
+                  <Label fx:id="lbl_name_3" layoutX="168.0" layoutY="182.0" text="TIPO" />
+                  <Label fx:id="lbl_price_3" layoutX="71.0" layoutY="201.0" text="000000" />
+                  <Label fx:id="lbl_sex_3" layoutX="188.0" layoutY="202.0" text="NULL" />
+               </children>
+            </Pane>
+            <Pane fx:id="father_4" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
+               <children>
+                  <Pane fx:id="img4" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </Pane>
+                  <Button fx:id="btn_add_car_shop_4" focusTraversable="false" layoutX="64.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_car_shop" styleClass="btn-add" text="AGREGAR AL CARRITO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="cmb_size_4" focusTraversable="false" layoutX="105.0" layoutY="224.0" prefWidth="150.0" promptText="Seleccione su talla">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <Label id="label-black" layoutX="41.0" layoutY="228.0" text="TALLA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" fx:id="lblMarca4" layoutX="18.0" layoutY="183.0" text="MARCA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" fx:id="lblGenero4" layoutX="124.0" layoutY="202.0" text="GÉNERO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" fx:id="lblTipo4" layoutX="124.0" layoutY="183.0" text="TIPO: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" fx:id="lblPrecio4" layoutX="19.0" layoutY="202.0" text="PRECIO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_brand_4" layoutX="72.0" layoutY="183.0" text="NIKE" />
+                  <Label fx:id="lbl_name_4" layoutX="164.0" layoutY="184.0" text="TIPO" />
+                  <Label fx:id="lbl_price_4" layoutX="72.0" layoutY="202.0" text="000000" />
+                  <Label fx:id="lbl_sex_4" layoutX="184.0" layoutY="203.0" text="NULL" />
+               </children>
+            </Pane>
+            <Pane fx:id="father_6" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
+               <children>
+                  <Pane fx:id="img6" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </Pane>
+                  <Button fx:id="btn_add_car_shop_6" focusTraversable="false" layoutX="61.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_car_shop" styleClass="btn-add" text="AGREGAR AL CARRITO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="cmb_size_6" focusTraversable="false" layoutX="99.0" layoutY="221.0" prefWidth="150.0" promptText="Seleccione su talla">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <Label id="label-black" layoutX="45.0" layoutY="226.0" text="TALLA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="16.0" layoutY="182.0" text="MARCA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="122.0" layoutY="200.0" text="GÉNERO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="122.0" layoutY="182.0" text="TIPO: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="17.0" layoutY="200.0" text="PRECIO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_brand_6" layoutX="70.0" layoutY="182.0" text="NIKE" />
+                  <Label fx:id="lbl_name_6" layoutX="162.0" layoutY="183.0" text="TIPO" />
+                  <Label fx:id="lbl_price_6" layoutX="70.0" layoutY="200.0" text="000000" />
+                  <Label fx:id="lbl_sex_6" layoutX="182.0" layoutY="201.0" text="NULL" />
+               </children>
+            </Pane>
+            <Pane fx:id="father_7" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
+               <children>
+                  <Pane fx:id="img7" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </Pane>
+                  <Button fx:id="btn_add_car_shop_7" focusTraversable="false" layoutX="60.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_car_shop" styleClass="btn-add" text="AGREGAR AL CARRITO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="cmb_size_7" focusTraversable="false" layoutX="100.0" layoutY="222.0" prefWidth="150.0" promptText="Seleccione su talla">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <Label id="label-black" layoutX="41.0" layoutY="226.0" text="TALLA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="15.0" layoutY="181.0" text="MARCA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="121.0" layoutY="200.0" text="GÉNERO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="121.0" layoutY="181.0" text="TIPO: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="16.0" layoutY="200.0" text="PRECIO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_brand_7" layoutX="69.0" layoutY="181.0" text="NIKE" />
+                  <Label fx:id="lbl_name_7" layoutX="161.0" layoutY="182.0" text="TIPO" />
+                  <Label fx:id="lbl_price_7" layoutX="69.0" layoutY="200.0" text="000000" />
+                  <Label fx:id="lbl_sex_7" layoutX="181.0" layoutY="201.0" text="NULL" />
+               </children>
+            </Pane>
+            <Pane fx:id="father_8" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </GridPane.margin>
+               <children>
+                  <Pane fx:id="img8" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </Pane>
+                  <Button fx:id="btn_add_car_shop_8" focusTraversable="false" layoutX="61.0" layoutY="255.0" mnemonicParsing="false" onAction="#add_car_shop" styleClass="btn-add" text="AGREGAR AL CARRITO">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="cmb_size_8" focusTraversable="false" layoutX="100.0" layoutY="220.0" prefWidth="150.0" promptText="Seleccione su talla">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <Label id="label-black" layoutX="37.0" layoutY="225.0" text="TALLA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="15.0" layoutY="182.0" text="MARCA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="121.0" layoutY="199.0" text="GÉNERO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="121.0" layoutY="182.0" text="TIPO: ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label id="label-black" layoutX="16.0" layoutY="199.0" text="PRECIO:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_brand_8" layoutX="69.0" layoutY="182.0" text="NIKE" />
+                  <Label fx:id="lbl_name_8" layoutX="161.0" layoutY="183.0" text="TIPO" />
+                  <Label fx:id="lbl_price_8" layoutX="69.0" layoutY="199.0" text="000000" />
+                  <Label fx:id="lbl_sex_8" layoutX="181.0" layoutY="200.0" text="NULL" />
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
       <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#pVisible" prefHeight="50.0" prefWidth="726.0" styleClass="linear-To-Right" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane fx:id="scrollPane01" layoutX="732.0" layoutY="45.0" prefHeight="455.0" prefWidth="375.0" visible="false">
@@ -65,14 +487,14 @@
             </Pane>
             <Button fx:id="btnGen" layoutX="4.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="nav-button-catalog" text="GENERO" />
             <Button fx:id="btnExp" layoutX="111.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="nav-button-catalog" text="EXPORTAR" />
-            <Pane fx:id="Pmenu" layoutX="5.0" layoutY="50.0" prefHeight="69.0" prefWidth="200.0" style="-fx-background-color: #38B2AC;" visible="false">
+            <Pane fx:id="Pmenu" layoutX="5.0" layoutY="50.0" prefHeight="77.0" prefWidth="200.0" style="-fx-background-color: none;" visible="false">
                <children>
-                  <Button fx:id="btnFem" mnemonicParsing="false" onAction="#cambiarCatalogo" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="FEMENINO">
+                  <Button fx:id="btn_cat_fem" layoutY="3.0" mnemonicParsing="false" onAction="#toogle_catalog" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="FEMENINO">
                      <cursor>
                         <Cursor fx:constant="OPEN_HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnMas" layoutY="36.0" mnemonicParsing="false" onAction="#cambiarCatalogo" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="MASCULINO">
+                  <Button fx:id="btn_cat_mas" layoutY="41.0" mnemonicParsing="false" onAction="#toogle_catalog" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="MASCULINO">
                      <cursor>
                         <Cursor fx:constant="OPEN_HAND" />
                      </cursor>
@@ -93,7 +515,7 @@
                   </Button>
                </children>
             </Pane>
-            <Button fx:id="btnPerfil" layoutX="903.0" layoutY="11.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="btn-icon">
+            <Button fx:id="btnPerfil" layoutX="959.0" layoutY="11.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="btn-icon">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -102,7 +524,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnHistory" layoutX="960.0" layoutY="11.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="btn-icon">
+            <Button fx:id="btnHistory" layoutX="903.0" layoutY="11.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="btn-icon">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -111,7 +533,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnEnviado" layoutX="1016.0" layoutY="11.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="btn-icon">
+            <Button fx:id="btnEnviado" layoutX="1014.0" layoutY="11.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="btn-icon">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -136,436 +558,14 @@
             </Label>
          </children>
       </Pane>
-      <GridPane fx:id="contenedorCatalogo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#pVisible" prefHeight="470.0" prefWidth="869.0" style="-fx-background-color: #F5F5EE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Pane fx:id="padre1" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container">
-               <GridPane.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </GridPane.margin>
-               <children>
-                  <Pane fx:id="img1" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </Pane>
-                  <Button fx:id="btnAggCrto1" focusTraversable="false" layoutX="64.0" layoutY="255.0" mnemonicParsing="false" onAction="#aggCarrito" styleClass="btn-add" text="AGREGAR AL CARRITO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox fx:id="cmbTalla1" focusTraversable="false" layoutX="103.0" layoutY="223.0" prefWidth="150.0" promptText="Seleccione su talla">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ComboBox>
-                  <Label id="label-black" layoutX="35.0" layoutY="227.0" text="TALLA">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblMarca1" layoutX="13.0" layoutY="183.0" text="MARCA:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblGenero1" layoutX="119.0" layoutY="202.0" text="GÉNERO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblTipo1" layoutX="119.0" layoutY="182.0" text="TIPO: ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblPrecio1" layoutX="14.0" layoutY="203.0" text="PRECIO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblMarca01" layoutX="67.0" layoutY="183.0" text="NIKE" />
-                  <Label fx:id="lblTipo01" layoutX="159.0" layoutY="182.0" text="TIPO" />
-                  <Label fx:id="lblPrecio01" layoutX="67.0" layoutY="204.0" text="000000" />
-                  <Label fx:id="lblGenero01" layoutX="179.0" layoutY="202.0" text="NULL" />
-               </children>
-            </Pane>
-            <Pane fx:id="padre5" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </GridPane.margin>
-               <children>
-                  <Pane fx:id="img5" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </Pane>
-                  <Button fx:id="btnAggCrto5" focusTraversable="false" layoutX="61.0" layoutY="255.0" mnemonicParsing="false" onAction="#aggCarrito" styleClass="btn-add" text="AGREGAR AL CARRITO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox fx:id="cmbTalla5" focusTraversable="false" layoutX="100.0" layoutY="223.0" prefWidth="150.0" promptText="Seleccione su talla">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ComboBox>
-                  <Label id="label-black" layoutX="42.0" layoutY="227.0" text="TALLA">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblMarca5" layoutX="15.0" layoutY="182.0" text="MARCA:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblGenero5" layoutX="121.0" layoutY="200.0" text="GÉNERO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblTipo5" layoutX="121.0" layoutY="182.0" text="TIPO: ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblPrecio5" layoutX="16.0" layoutY="200.0" text="PRECIO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblMarca05" layoutX="69.0" layoutY="182.0" text="NIKE" />
-                  <Label fx:id="lblTipo05" layoutX="161.0" layoutY="183.0" text="TIPO" />
-                  <Label fx:id="lblPrecio05" layoutX="69.0" layoutY="200.0" text="000000" />
-                  <Label fx:id="lblGenero05" layoutX="181.0" layoutY="201.0" text="NULL" />
-               </children>
-            </Pane>
-            <Pane fx:id="padre2" layoutX="18.0" layoutY="18.0" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </GridPane.margin>
-               <children>
-                  <Pane fx:id="img2" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="249.0" styleClass="panel-view">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </Pane>
-                  <Button fx:id="btnAggCrto2" focusTraversable="false" layoutX="64.0" layoutY="255.0" mnemonicParsing="false" onAction="#aggCarrito" styleClass="btn-add" text="AGREGAR AL CARRITO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox fx:id="cmbTalla2" focusTraversable="false" layoutX="105.0" layoutY="223.0" prefWidth="150.0" promptText="Seleccione su talla" styleClass="combo-box">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ComboBox>
-                  <Label id="label-black" layoutX="40.0" layoutY="227.0" text="TALLA">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblMarca2" layoutX="19.0" layoutY="183.0" text="MARCA:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblGenero2" layoutX="127.0" layoutY="203.0" text="GÉNERO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblTipo2" layoutX="127.0" layoutY="183.0" text="TIPO: ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblPrecio2" layoutX="19.0" layoutY="203.0" text="PRECIO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblMarca02" layoutX="73.0" layoutY="183.0" text="NIKE" />
-                  <Label fx:id="lblTipo02" layoutX="167.0" layoutY="184.0" text="TIPO" />
-                  <Label fx:id="lblPrecio02" layoutX="73.0" layoutY="203.0" text="000000" />
-                  <Label fx:id="lblGenero02" layoutX="187.0" layoutY="203.0" text="NULL" />
-               </children>
-            </Pane>
-            <Pane fx:id="padre3" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="2">
-               <GridPane.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </GridPane.margin>
-               <children>
-                  <Pane fx:id="img3" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </Pane>
-                  <Button fx:id="btnAggCrto3" focusTraversable="false" layoutX="64.0" layoutY="255.0" mnemonicParsing="false" onAction="#aggCarrito" styleClass="btn-add" text="AGREGAR AL CARRITO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox fx:id="cmbTalla3" focusTraversable="false" layoutX="104.0" layoutY="223.0" prefWidth="150.0" promptText="Seleccione su talla">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ComboBox>
-                  <Label id="label-black" layoutX="39.0" layoutY="227.0" text="TALLA">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblMarca3" layoutX="17.0" layoutY="181.0" text="MARCA:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblGenero3" layoutX="128.0" layoutY="201.0" text="GÉNERO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblTipo3" layoutX="128.0" layoutY="181.0" text="TIPO: ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblPrecio3" layoutX="18.0" layoutY="201.0" text="PRECIO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblMarca03" layoutX="71.0" layoutY="181.0" text="NIKE" />
-                  <Label fx:id="lblTipo03" layoutX="168.0" layoutY="182.0" text="TIPO" />
-                  <Label fx:id="lblPrecio03" layoutX="71.0" layoutY="201.0" text="000000" />
-                  <Label fx:id="lblGenero03" layoutX="188.0" layoutY="202.0" text="NULL" />
-               </children>
-            </Pane>
-            <Pane fx:id="padre4" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="3">
-               <GridPane.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </GridPane.margin>
-               <children>
-                  <Pane fx:id="img4" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </Pane>
-                  <Button fx:id="btnAggCrto4" focusTraversable="false" layoutX="64.0" layoutY="255.0" mnemonicParsing="false" onAction="#aggCarrito" styleClass="btn-add" text="AGREGAR AL CARRITO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox fx:id="cmbTalla4" focusTraversable="false" layoutX="105.0" layoutY="224.0" prefWidth="150.0" promptText="Seleccione su talla">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ComboBox>
-                  <Label id="label-black" layoutX="41.0" layoutY="228.0" text="TALLA">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblMarca4" layoutX="18.0" layoutY="183.0" text="MARCA:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblGenero4" layoutX="124.0" layoutY="202.0" text="GÉNERO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblTipo4" layoutX="124.0" layoutY="183.0" text="TIPO: ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblPrecio4" layoutX="19.0" layoutY="202.0" text="PRECIO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblMarca04" layoutX="72.0" layoutY="183.0" text="NIKE" />
-                  <Label fx:id="lblTipo04" layoutX="164.0" layoutY="184.0" text="TIPO" />
-                  <Label fx:id="lblPrecio04" layoutX="72.0" layoutY="202.0" text="000000" />
-                  <Label fx:id="lblGenero04" layoutX="184.0" layoutY="203.0" text="NULL" />
-               </children>
-            </Pane>
-            <Pane fx:id="padre6" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </GridPane.margin>
-               <children>
-                  <Pane fx:id="img6" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </Pane>
-                  <Button fx:id="btnAggCrto6" focusTraversable="false" layoutX="61.0" layoutY="255.0" mnemonicParsing="false" onAction="#aggCarrito" styleClass="btn-add" text="AGREGAR AL CARRITO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox fx:id="cmbTalla6" focusTraversable="false" layoutX="99.0" layoutY="221.0" prefWidth="150.0" promptText="Seleccione su talla">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ComboBox>
-                  <Label id="label-black" layoutX="45.0" layoutY="226.0" text="TALLA">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblMarca6" layoutX="16.0" layoutY="182.0" text="MARCA:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblGenero6" layoutX="122.0" layoutY="200.0" text="GÉNERO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblTipo6" layoutX="122.0" layoutY="182.0" text="TIPO: ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblPrecio6" layoutX="17.0" layoutY="200.0" text="PRECIO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblMarca06" layoutX="70.0" layoutY="182.0" text="NIKE" />
-                  <Label fx:id="lblTipo06" layoutX="162.0" layoutY="183.0" text="TIPO" />
-                  <Label fx:id="lblPrecio06" layoutX="70.0" layoutY="200.0" text="000000" />
-                  <Label fx:id="lblGenero06" layoutX="182.0" layoutY="201.0" text="NULL" />
-               </children>
-            </Pane>
-            <Pane fx:id="padre7" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </GridPane.margin>
-               <children>
-                  <Pane fx:id="img7" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </Pane>
-                  <Button fx:id="btnAggCrto7" focusTraversable="false" layoutX="60.0" layoutY="255.0" mnemonicParsing="false" onAction="#aggCarrito" styleClass="btn-add" text="AGREGAR AL CARRITO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox fx:id="cmbTalla7" focusTraversable="false" layoutX="99.0" layoutY="222.0" prefWidth="150.0" promptText="Seleccione su talla">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ComboBox>
-                  <Label id="label-black" layoutX="41.0" layoutY="226.0" text="TALLA">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblMarca7" layoutX="15.0" layoutY="181.0" text="MARCA:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblGenero7" layoutX="121.0" layoutY="200.0" text="GÉNERO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblTipo7" layoutX="121.0" layoutY="181.0" text="TIPO: ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblPrecio7" layoutX="16.0" layoutY="200.0" text="PRECIO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblMarca07" layoutX="69.0" layoutY="181.0" text="NIKE" />
-                  <Label fx:id="lblTipo07" layoutX="161.0" layoutY="182.0" text="TIPO" />
-                  <Label fx:id="lblPrecio07" layoutX="69.0" layoutY="200.0" text="000000" />
-                  <Label fx:id="lblGenero07" layoutX="181.0" layoutY="201.0" text="NULL" />
-               </children>
-            </Pane>
-            <Pane fx:id="padre8" prefHeight="122.0" prefWidth="106.0" styleClass="panel-container" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </GridPane.margin>
-               <children>
-                  <Pane fx:id="img8" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
-                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-                     </padding>
-                  </Pane>
-                  <Button fx:id="btnAggCrto8" focusTraversable="false" layoutX="61.0" layoutY="255.0" mnemonicParsing="false" onAction="#aggCarrito" styleClass="btn-add" text="AGREGAR AL CARRITO">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox fx:id="cmbTalla8" focusTraversable="false" layoutX="100.0" layoutY="220.0" prefWidth="150.0" promptText="Seleccione su talla">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ComboBox>
-                  <Label id="label-black" layoutX="37.0" layoutY="225.0" text="TALLA">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblMarca8" layoutX="15.0" layoutY="182.0" text="MARCA:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblGenero8" layoutX="121.0" layoutY="199.0" text="GÉNERO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblTipo8" layoutX="121.0" layoutY="182.0" text="TIPO: ">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label id="label-black" fx:id="lblPrecio8" layoutX="16.0" layoutY="199.0" text="PRECIO:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblMarca08" layoutX="69.0" layoutY="182.0" text="NIKE" />
-                  <Label fx:id="lblTipo08" layoutX="161.0" layoutY="183.0" text="TIPO" />
-                  <Label fx:id="lblPrecio08" layoutX="69.0" layoutY="199.0" text="000000" />
-                  <Label fx:id="lblGenero08" layoutX="181.0" layoutY="200.0" text="NULL" />
-               </children>
-            </Pane>
-         </children>
-      </GridPane>
-      <Pane fx:id="PmenuP" layoutX="742.0" layoutY="45.0" prefHeight="69.0" prefWidth="200.0" style="-fx-background-color: #38B2AC;" visible="false">
+      <Pane fx:id="PmenuP" layoutX="808.0" layoutY="48.0" prefHeight="69.0" prefWidth="200.0" style="-fx-background-color: #38B2AC;" visible="false">
          <children>
             <Button fx:id="btnCerrarS" mnemonicParsing="false" onAction="#actionEvent" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="CERRAR SESIÓN">
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnCambC" focusTraversable="false" layoutY="36.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="33.0" prefWidth="200.0" styleClass="styled-items" text="CAMBIAR CLAVE">
+            <Button fx:id="btnCambC" focusTraversable="false" layoutY="36.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="CAMBIAR CLAVE">
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
