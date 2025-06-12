@@ -250,20 +250,12 @@ public class Controller_View_Catalog_Home implements Initializable {
 
         Button button = new Button("Select Directory");
         button.setOnAction((ActionEvent ex) -> {
-            try {
-                File selectedDirectory = directoryChooser.showDialog(stage);
-                stacks_products.export_catalog_pdf(selectedDirectory.getAbsolutePath() + "\\", sex);
-                stage.close();
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setContentText("Archivo Guardado Exitosamente");
-                a.showAndWait();
-            } catch (IOException e) {
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setContentText("No se Pudo Guardar el archivo");
-                a.showAndWait();
-                Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, null, "No se Pudo Guardar el archivo: " + e.getMessage());
-            }
-
+            File selectedDirectory = directoryChooser.showDialog(stage);
+            stacks_products.export_catalog_pdf(selectedDirectory.getAbsolutePath() + "\\", sex);
+            stage.close();
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("Archivo Guardado Exitosamente");
+            a.showAndWait();
         });
 
         HBox vs = new HBox(new Label("Selecciona Direccion de Carpeta: "), button);
@@ -555,9 +547,9 @@ public class Controller_View_Catalog_Home implements Initializable {
                 scrollPane01.setVisible(false);
             }
         } else if (event.getSource() == btnExFem) {
-            export_catalog_pdf("FEMENINO");
+            export_catalog_pdf("Mujer");
         } else if (event.getSource() == btnExMas) {
-            export_catalog_pdf("MASCULINO");
+            export_catalog_pdf("Hombre");
         } else if (event.getSource() == btnHistory) {
             PmenuP.setVisible(false);
             Pmenu.setVisible(false);

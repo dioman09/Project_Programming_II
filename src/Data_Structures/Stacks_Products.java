@@ -1,21 +1,9 @@
 package Data_Structures;
 
 import Models.Product;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import Models.ProductCatalogExporter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -140,72 +128,18 @@ public class Stacks_Products {
         }
     }
 
-    public void export_catalog_pdf(String location, String sex) throws FileNotFoundException, IOException {
-        String info = "                CATALOGO " + sex + "\n" + "\n";
-        @SuppressWarnings("unchecked")
-        Document document = new Document();
+    public void export_catalog_pdf(String location, String sex) {
+        ProductCatalogExporter exporter = new ProductCatalogExporter(products_all);
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream(location + "NIKE-STORE CATALOGO " + sex + ".pdf"));
-            document.open();
-
-            BaseFont bf1 = BaseFont.createFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-            Font font1 = new Font(bf1, 14);
-
-            BaseFont bf2 = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-            Font font2 = new Font(bf2, 12);
-
-            BaseFont bf3 = BaseFont.createFont(BaseFont.HELVETICA_BOLDOBLIQUE, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-            Font font3 = new Font(bf3, 12);
-
-            PdfPTable table = new PdfPTable(2);
-
-            String[] headers = {"Modelo", "Descripcion"};
-
-            for (String header : headers) {
-                PdfPCell headerCell = new PdfPCell();
-                headerCell.setPhrase(new com.itextpdf.text.Phrase(header, font3));
-                table.addCell(headerCell);
-            }
-
-            for (Product product : products_all) {
-                if (product.getSex().equals(sex)) {
-                    String info_product = "\n\nNombre: " + product.getName() + "\n\n"
-                            + "Marca: " + product.getBrand() + "\n\n"
-                            + "Sexo: " + product.getSex() + "\n\n"
-                            + "Precio: " + String.valueOf(product.getPrice()) + "\n\n"
-                            + "Tallas: " + product.getSize();
-
-                    PdfPCell celda = new PdfPCell();
-
-                    String imagePath = product.getUrls_images().get(0);
-                    File imageFile = new File(imagePath);
-
-                    if (imageFile.exists()) {
-                        try {
-                            Image imagen = Image.getInstance(imagePath);
-                            celda.addElement(imagen);
-                            table.addCell(celda);
-                        } catch (IOException | DocumentException e) {
-                        }
-                    } else {
-                        System.out.println("La ruta de la imagen no existe: " + imagePath);
-                    }
-
-                    table.addCell(new Paragraph(info_product, font2));
-                }
-            }
-            Paragraph parag = new Paragraph(info, font1);
-            parag.setAlignment(Element.ALIGN_CENTER);
-            document.add(parag);
-            document.add(table);
-
-            document.close();
-        } catch (DocumentException | FileNotFoundException e) {
-            Logger.getLogger(Stacks_Products.class.getName()).log(Level.SEVERE, null, e);
+            exporter.exportCatalogPdf(location, sex);
+            System.out.println("Catálogo generado exitosamente");
+        } catch (IOException e) {
+            System.err.println("Error al generar el catálogo: " + e.getMessage());
+            e.printStackTrace();
         }
     }
-
+    
     public void saveCarShop() {
         saveStackToFile(products_carShop, "Data_carShop.txt");
     }
