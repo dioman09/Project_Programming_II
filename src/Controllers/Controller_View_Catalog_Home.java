@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -29,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 public class Controller_View_Catalog_Home implements Initializable {
@@ -237,6 +239,42 @@ public class Controller_View_Catalog_Home implements Initializable {
         } else {
             btnHistory.setVisible(false);
         }
+    }
+
+    public void export_catalog_pdf(String sex) {
+        Stage stage = new Stage();
+        stage.setTitle("Exportar Catalogo " + sex);
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+
+        Button button = new Button("Select Directory");
+        button.setOnAction((ActionEvent ex) -> {
+            try {
+                File selectedDirectory = directoryChooser.showDialog(stage);
+                stacks_products.export_catalog_pdf(selectedDirectory.getAbsolutePath() + "\\", sex);
+                stage.close();
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Archivo Guardado Exitosamente");
+                a.showAndWait();
+            } catch (IOException e) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("No se Pudo Guardar el archivo");
+                a.showAndWait();
+                Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, null, "No se Pudo Guardar el archivo: " + e.getMessage());
+            }
+
+        });
+
+        HBox vs = new HBox(new Label("Selecciona Direccion de Carpeta: "), button);
+        vs.setAlignment(Pos.CENTER);
+        vs.setPadding(new Insets(10));
+        vs.setSpacing(10);
+
+        Scene scene = new Scene(vs);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void run_arranque() {
@@ -517,9 +555,9 @@ public class Controller_View_Catalog_Home implements Initializable {
                 scrollPane01.setVisible(false);
             }
         } else if (event.getSource() == btnExFem) {
-
+            export_catalog_pdf("FEMENINO");
         } else if (event.getSource() == btnExMas) {
-
+            export_catalog_pdf("MASCULINO");
         } else if (event.getSource() == btnHistory) {
             PmenuP.setVisible(false);
             Pmenu.setVisible(false);
