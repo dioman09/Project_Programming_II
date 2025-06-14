@@ -24,7 +24,7 @@ public class Controller_View_Arranque implements Initializable {
 
     private final Circular_List_Users list_users = Data_Singleton.getInstance().getList_users();
     private final Stacks_Products stacks_products = Data_Singleton.getInstance().getStacks();
-    
+
     @FXML
     private Button btn_admin;
     @FXML
@@ -53,9 +53,9 @@ public class Controller_View_Arranque implements Initializable {
 
         link_02.setOnMouseEntered(event -> ima_link_02.setImage(imageHover_));
         link_02.setOnMouseExited(event -> ima_link_02.setImage(imageNormal_));
-        
+
         list_users.take();
-        stacks_products.loadAll();
+        stacks_products.load();
     }
 
     public void run_login(String type) {

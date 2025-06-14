@@ -39,19 +39,13 @@ public class Controller_View_Catalog_Home implements Initializable {
     private final Circular_List_Users list_users = Data_Singleton.getInstance().getList_users();
 
     @FXML
-    private Pane scrollPane01;
+    private Pane pane_car_shop;
     @FXML
     private Button btnPagarProduct;
     @FXML
     private TextField txtTotal;
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private VBox panelContenCarrito;
-    @FXML
-    private Pane panelContenProdPagados;
-    @FXML
-    private VBox contenPagados;
+    private Pane pane_send_product;
     @FXML
     private Button btnGen;
     @FXML
@@ -222,6 +216,12 @@ public class Controller_View_Catalog_Home implements Initializable {
     private Label lbl_price_8;
     @FXML
     private Label lbl_sex_8;
+    @FXML
+    private FlowPane container_purchase_state;
+    @FXML
+    private Button btn_back;
+    @FXML
+    private FlowPane conten_elements_car;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -236,9 +236,67 @@ public class Controller_View_Catalog_Home implements Initializable {
         User user = list_users.searchByEmail(labelUser.getText());
         if (user != null && user instanceof Admin) {
             btnHistory.setVisible(true);
+            btnExp.setVisible(true);
         } else {
             btnHistory.setVisible(false);
+            btnExp.setVisible(false);
         }
+    }
+
+    public void load_products() {
+        for (Product product : stacks_products.getProducts_carShop()) {
+            if (product.getEmail_buyer().equals(labelUser.getText())) {
+                try {
+                    String urlLocal = System.getProperty("user.dir") + "\\" + product.getUrls_images().get(0);
+                    File file = Paths.get(urlLocal).toFile();
+                    process_product_2(product, new Image(new FileInputStream(file)));
+                } catch (FileNotFoundException e) {
+                    Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
+                }
+            }
+        }
+
+        for (Product product : stacks_products.getProducts_purchaseHistory()) {
+            if (product.getEmail_buyer().equals(labelUser.getText())) {
+                try {
+                    String urlLocal = System.getProperty("user.dir") + "\\" + product.getUrls_images().get(0);
+                    File file = Paths.get(urlLocal).toFile();
+                    createPurchaseHistoryItem(product, new Image(new FileInputStream(file)));
+                } catch (FileNotFoundException e) {
+                    Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
+                }
+            }
+        }
+    }
+
+    private void createPurchaseHistoryItem(Product product, Image image) {
+        ProductUIComponents components = new ProductUIComponents();
+        components.imageView = new ImageView(image);
+        components.imageView.setFitHeight(60);
+        components.imageView.setFitWidth(70);
+        components.imagePane.getChildren().add(components.imageView);
+
+        Label priceLabel = new Label("Precio: " + product.getPrice());
+        Label statusLabel = new Label("Estado: Enviado");
+        Label dateLabel = new Label("Fecha envio: " + product.getDate_purchase_formatt(product.getDate_purchase()));
+
+        GridPane historyGrid = new GridPane();
+        historyGrid.setMaxSize(375, 394);
+
+        ColumnConstraints column = new ColumnConstraints();
+        column.setPrefWidth(container_purchase_state.getWidth() / 3);
+        historyGrid.getColumnConstraints().add(column);
+
+        historyGrid.setBackground(new Background(new BackgroundFill(Color.WHITESMOKE, null, null)));
+        historyGrid.getStylesheets().add(getClass().getResource("/Style_Sheets/Styles.css").toExternalForm());
+        historyGrid.getStyleClass().add("grid-car");
+
+        historyGrid.add(components.imagePane, 0, 1);
+        historyGrid.add(priceLabel, 1, 0);
+        historyGrid.add(statusLabel, 1, 1);
+        historyGrid.add(dateLabel, 1, 2);
+
+        container_purchase_state.getChildren().add(historyGrid);
     }
 
     public void export_catalog_pdf(String sex) {
@@ -377,141 +435,170 @@ public class Controller_View_Catalog_Home implements Initializable {
     }
 
     private void process_product(Product product, Image image) {
-        Label lbl_size = new Label();
-        Label lbl_price = new Label();
-        Label lbl_brand = new Label();
-        Label lbl_sex = new Label();
-        Label lbl_name = new Label();
-        Pane Imag = new Pane();
-        ImageView miniV;
-        Button btnComprar = new Button("Comprar");
-        Button btnEliminar = new Button("Eliminar");
-        btnComprar.getStylesheets().add(getClass().getResource("/Style_Sheets/Styles.css").toExternalForm());
-        btnComprar.getStyleClass().add("btn-add");
-        btnEliminar.getStylesheets().add(getClass().getResource("/Style_Sheets/Styles.css").toExternalForm());
-        btnEliminar.getStyleClass().add("btn-add");
-
-        GridPane contendElemtProductos = new GridPane();
-        contendElemtProductos.setAlignment(Pos.CENTER);
-        contendElemtProductos.setMaxSize(375, 394);
-        ColumnConstraints column = new ColumnConstraints();
-        column.setPrefWidth(panelContenCarrito.getWidth() / 2);
-
-        contendElemtProductos.getColumnConstraints().addAll(column);
-        contendElemtProductos.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
-        contendElemtProductos.getStylesheets().add(getClass().getResource("/Style_Sheets/Styles.css").toExternalForm());
-        contendElemtProductos.getStyleClass().add("grid-car");
-
-        btnEliminar.setOnAction((ActionEvent event) -> {
-            panelContenCarrito.getChildren().remove(contendElemtProductos);
-            double t = 0;
-            for (int i = 0; i < panelContenCarrito.getChildren().size(); i++) {
-                if (panelContenCarrito.getChildren().get(i) instanceof GridPane) {
-
-                    GridPane gridPane = (GridPane) panelContenCarrito.getChildren().get(i);
-
-                    Node dato = get_node_whit_gridPane(gridPane, 1, 1);
-
-                    Label precio = (Label) dato;
-
-                    double p = Double.parseDouble(precio.getText());
-
-                    txtTotal.setText("$" + (p + t));
-                    String[] to = txtTotal.getText().split("\\$");
-                    t = Double.parseDouble(to[1]);
-                }
-            }
-
-            if (panelContenCarrito.getChildren().isEmpty()) {
-                txtTotal.setText("");
-            }
-
-            list_users.Alert(Alert.AlertType.INFORMATION, "Aviso", "Se ha eliminado el porducto del carrito.");
-        });
-
-        btnComprar.setOnAction((ActionEvent event) -> {
-            Product producto = product;
-            String email = labelUser.getText();
-
-            LocalDateTime date_purchase = LocalDateTime.now();
-
-            product.setDate_purchase(date_purchase);
-            producto.setEmail_buyer(email);
-
-            stacks_products.pushProduct(stacks_products.getProducts_purchaseHistory(), producto);
-            stacks_products.savePurchaseHistory();
-
-            GridPane grid1 = (GridPane) btnComprar.getParent();
-            Node image1 = get_node_whit_gridPane(grid1, 1, 0);
-            Node total = get_node_whit_gridPane(grid1, 1, 1);
-            Label pre = (Label) total;
-            Label precioT = new Label();
-            precioT.setText("Precio: " + pre.getText());
-            Label estado = new Label();
-            estado.setText("Estado: Enviado");
-            Label fecha = new Label();
-
-            fecha.setText("Fecha envio: " + producto.getDate_purchase_formatt(date_purchase));
-            GridPane grid2 = new GridPane();
-            ColumnConstraints column1 = new ColumnConstraints();
-            column1.setPrefWidth(contenPagados.getWidth() / 3);
-            grid2.getColumnConstraints().addAll(column1);
-            grid2.setBackground(new Background(new BackgroundFill(Color.WHITESMOKE, null, null)));
-            grid2.getStylesheets().add(getClass().getResource("/Style_Sheets/Styles.css").toExternalForm());
-            grid2.getStyleClass().add("grid-car");
-            grid2.add(image1, 0, 1);
-            grid2.add(precioT, 1, 0);
-            grid2.add(estado, 1, 1);
-            grid2.add(fecha, 1, 2);
-            contenPagados.getChildren().add(grid2);
-            panelContenCarrito.getChildren().remove(contendElemtProductos);
-            double t = 0;
-            for (int i = 0; i < panelContenCarrito.getChildren().size(); i++) {
-                if (panelContenCarrito.getChildren().get(i) instanceof GridPane) {
-
-                    GridPane gridPane = (GridPane) panelContenCarrito.getChildren().get(i);
-
-                    Node dato = get_node_whit_gridPane(gridPane, 1, 1);
-
-                    Label precio2 = (Label) dato;
-
-                    double p = Double.parseDouble(precio2.getText());
-
-                    txtTotal.setText("$" + (p + t));
-                    String[] to = txtTotal.getText().split("\\$");
-                    t = Double.parseDouble(to[1]);
-                }
-            }
-            if (panelContenCarrito.getChildren().isEmpty()) {
-                txtTotal.setText("");
-            }
-        });
-
-        if (product != null) {
-            miniV = new ImageView(image);
-            miniV.setFitHeight(40);
-            miniV.setFitWidth(30);
-            Imag.getChildren().add(miniV);
-
-            lbl_size.setText(product.getSize());
-            lbl_price.setText(product.getPrice() + "");
-            lbl_brand.setText(product.getBrand());
-            lbl_sex.setText(product.getSex());
-            lbl_name.setText(product.getName());
-
-            contendElemtProductos.add(Imag, 0, 1);
-            contendElemtProductos.add(lbl_brand, 0, 2);
-            contendElemtProductos.add(lbl_name, 1, 0);
-            contendElemtProductos.add(lbl_sex, 2, 0);
-            contendElemtProductos.add(lbl_size, 2, 1);
-            contendElemtProductos.add(lbl_price, 1, 1);
-            contendElemtProductos.add(btnComprar, 1, 2);
-            contendElemtProductos.add(btnEliminar, 2, 2);
-
-            panelContenCarrito.getChildren().add(contendElemtProductos);
+        if (product == null) {
+            return;
         }
 
-        list_users.Alert(Alert.AlertType.INFORMATION, "Aviso", "El " + product.getName() + " agregado exitosamente al carrito de compras.");
+        ProductUIComponents components = createProductComponents(product, image);
+
+        GridPane productGrid = setupProductGrid(components);
+
+        setupButtonActions(components, product, productGrid);
+
+        conten_elements_car.getChildren().add(productGrid);
+
+        showSuccessAlert(product);
+    }
+
+    private void process_product_2(Product product, Image image) {
+        if (product == null) {
+            return;
+        }
+
+        ProductUIComponents components = createProductComponents(product, image);
+
+        GridPane productGrid = setupProductGrid(components);
+
+        setupButtonActions(components, product, productGrid);
+
+        conten_elements_car.getChildren().add(productGrid);
+    }
+
+    private static class ProductUIComponents {
+
+        Label sizeLabel = new Label();
+        Label priceLabel = new Label();
+        Label brandLabel = new Label();
+        Label sexLabel = new Label();
+        Label nameLabel = new Label();
+        Pane imagePane = new Pane();
+        ImageView imageView;
+        Button buyButton = new Button("Comprar");
+        Button deleteButton = new Button("Eliminar");
+    }
+
+    private ProductUIComponents createProductComponents(Product product, Image image) {
+        ProductUIComponents components = new ProductUIComponents();
+
+        components.imageView = new ImageView(image);
+        components.imageView.setFitHeight(60);
+        components.imageView.setFitWidth(70);
+        components.imagePane.getChildren().add(components.imageView);
+
+        components.sizeLabel.setText(product.getSize());
+        components.priceLabel.setText(String.valueOf(product.getPrice()));
+        components.brandLabel.setText(product.getBrand());
+        components.sexLabel.setText(product.getSex());
+        components.nameLabel.setText(product.getName());
+
+        String stylesheet = getClass().getResource("/Style_Sheets/Styles.css").toExternalForm();
+        components.buyButton.getStylesheets().add(stylesheet);
+        components.buyButton.getStyleClass().add("btn-add");
+        components.deleteButton.getStylesheets().add(stylesheet);
+        components.deleteButton.getStyleClass().add("btn-remove");
+
+        return components;
+    }
+
+    private GridPane setupProductGrid(ProductUIComponents components) {
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setMaxSize(375, 394);
+
+        ColumnConstraints column = new ColumnConstraints();
+        column.setPrefWidth(conten_elements_car.getWidth() / 2);
+        grid.getColumnConstraints().add(column);
+
+        grid.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+        grid.getStylesheets().add(getClass().getResource("/Style_Sheets/Styles.css").toExternalForm());
+        grid.getStyleClass().add("grid-car");
+
+        grid.add(components.imagePane, 0, 1);
+        grid.add(components.brandLabel, 0, 2);
+        grid.add(components.nameLabel, 1, 0);
+        grid.add(components.sexLabel, 2, 0);
+        grid.add(components.sizeLabel, 2, 1);
+        grid.add(components.priceLabel, 1, 1);
+        grid.add(components.buyButton, 1, 2);
+        grid.add(components.deleteButton, 2, 2);
+
+        return grid;
+    }
+
+    private void setupButtonActions(ProductUIComponents components, Product product, GridPane productGrid) {
+        components.deleteButton.setOnAction(event -> handleDeleteProduct(product, productGrid));
+        components.buyButton.setOnAction(event -> handleBuyProduct(product, productGrid));
+    }
+
+    private void handleDeleteProduct(Product product, GridPane productGrid) {
+        conten_elements_car.getChildren().remove(productGrid);
+        stacks_products.getProducts_carShop().remove(product);
+        stacks_products.saveCarShop();
+
+        updateTotalPrice();
+        showAlert("Aviso", "Se ha eliminado el producto del carrito.");
+    }
+
+    private void handleBuyProduct(Product product, GridPane productGrid) {
+        stacks_products.getProducts_carShop().remove(product);
+        stacks_products.saveCarShop();
+
+        LocalDateTime date_purchase = LocalDateTime.now();
+        product.setDate_purchase(date_purchase);
+        stacks_products.pushProduct(stacks_products.getProducts_purchaseHistory(), product);
+        stacks_products.savePurchaseHistory();
+
+        createPurchaseHistoryItem(product, productGrid);
+        conten_elements_car.getChildren().remove(productGrid);
+
+        updateTotalPrice();
+    }
+
+    private void createPurchaseHistoryItem(Product product, GridPane sourceGrid) {
+        Node imageNode = get_node_whit_gridPane(sourceGrid, 1, 0);
+
+        Label priceLabel = new Label("Precio: " + product.getPrice());
+        Label statusLabel = new Label("Estado: Enviado");
+        Label dateLabel = new Label("Fecha envio: " + product.getDate_purchase_formatt(product.getDate_purchase()));
+
+        GridPane historyGrid = new GridPane();
+        historyGrid.setMaxSize(375, 394);
+
+        ColumnConstraints column = new ColumnConstraints();
+        column.setPrefWidth(container_purchase_state.getWidth() / 3);
+        historyGrid.getColumnConstraints().add(column);
+
+        historyGrid.setBackground(new Background(new BackgroundFill(Color.WHITESMOKE, null, null)));
+        historyGrid.getStylesheets().add(getClass().getResource("/Style_Sheets/Styles.css").toExternalForm());
+        historyGrid.getStyleClass().add("grid-car");
+
+        historyGrid.add(imageNode, 0, 1);
+        historyGrid.add(priceLabel, 1, 0);
+        historyGrid.add(statusLabel, 1, 1);
+        historyGrid.add(dateLabel, 1, 2);
+
+        container_purchase_state.getChildren().add(historyGrid);
+    }
+
+    private void updateTotalPrice() {
+        double total = conten_elements_car.getChildren().stream()
+                .filter(node -> node instanceof GridPane)
+                .mapToDouble(node -> {
+                    GridPane grid = (GridPane) node;
+                    Node priceNode = get_node_whit_gridPane(grid, 1, 1);
+                    return priceNode instanceof Label ? Double.valueOf(((Label) priceNode).getText()) : 0;
+                })
+                .sum();
+
+        txtTotal.setText(total > 0 ? "$" + total : "");
+    }
+
+    private void showSuccessAlert(Product product) {
+        showAlert("Aviso", "El " + product.getName() + " agregado exitosamente al carrito de compras.");
+    }
+
+    private void showAlert(String title, String message) {
+        list_users.Alert(Alert.AlertType.INFORMATION, title, message);
     }
 
     @FXML
@@ -530,9 +617,8 @@ public class Controller_View_Catalog_Home implements Initializable {
                 PmenuE.setVisible(false);
                 Pmenu.setVisible(true);
                 PmenuP.setVisible(false);
-                panelContenProdPagados.setVisible(false);
-                scrollPane.setVisible(false);
-                scrollPane01.setVisible(false);
+                pane_send_product.setVisible(false);
+                pane_car_shop.setVisible(false);
             }
         } else if (event.getSource() == btnExp) {
             if (PmenuE.isVisible()) {
@@ -542,9 +628,8 @@ public class Controller_View_Catalog_Home implements Initializable {
                 Pmenu.setVisible(false);
                 PmenuE.setVisible(true);
                 PmenuP.setVisible(false);
-                panelContenProdPagados.setVisible(false);
-                scrollPane.setVisible(false);
-                scrollPane01.setVisible(false);
+                pane_send_product.setVisible(false);
+                pane_car_shop.setVisible(false);
             }
         } else if (event.getSource() == btnExFem) {
             export_catalog_pdf("Mujer");
@@ -554,9 +639,8 @@ public class Controller_View_Catalog_Home implements Initializable {
             PmenuP.setVisible(false);
             Pmenu.setVisible(false);
             PmenuE.setVisible(false);
-            scrollPane.setVisible(false);
-            scrollPane01.setVisible(false);
-            panelContenProdPagados.setVisible(false);
+            pane_car_shop.setVisible(false);
+            pane_send_product.setVisible(false);
 
         } else if (event.getSource() == btnPerfil) {
             if (PmenuP.isVisible()) {
@@ -567,16 +651,15 @@ public class Controller_View_Catalog_Home implements Initializable {
                 Pmenu.setVisible(false);
                 PmenuE.setVisible(false);
                 PmenuP.setVisible(true);
-                panelContenProdPagados.setVisible(false);
-                scrollPane.setVisible(false);
-                scrollPane01.setVisible(false);
+                pane_send_product.setVisible(false);
+                pane_car_shop.setVisible(false);
             }
         } else if (event.getSource() == btnCarro) {
             double t = 0;
-            for (int i = 0; i < panelContenCarrito.getChildren().size(); i++) {
-                if (panelContenCarrito.getChildren().get(i) instanceof GridPane) {
+            for (int i = 0; i < conten_elements_car.getChildren().size(); i++) {
+                if (conten_elements_car.getChildren().get(i) instanceof GridPane) {
 
-                    GridPane gridPane = (GridPane) panelContenCarrito.getChildren().get(i);
+                    GridPane gridPane = (GridPane) conten_elements_car.getChildren().get(i);
 
                     Node dato = get_node_whit_gridPane(gridPane, 1, 1);
 
@@ -590,16 +673,16 @@ public class Controller_View_Catalog_Home implements Initializable {
                 }
             }
 
-            if (panelContenCarrito.getChildren().isEmpty()) {
+            if (conten_elements_car.getChildren().isEmpty()) {
                 txtTotal.setText("");
             }
 
-            scrollPane.setVisible(!scrollPane.isVisible());
-            scrollPane01.setVisible(!scrollPane01.isVisible());
+            pane_send_product.setVisible(!pane_send_product.isVisible());
+            pane_car_shop.setVisible(!pane_car_shop.isVisible());
             PmenuP.setVisible(false);
             Pmenu.setVisible(false);
             PmenuE.setVisible(false);
-            panelContenProdPagados.setVisible(false);
+            pane_send_product.setVisible(false);
         } else if (event.getSource() == btnCerrarS) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
             alert.setContentText("Está apunto de cerrar la sesión\nEstá seguro de esto? :)");
@@ -617,15 +700,15 @@ public class Controller_View_Catalog_Home implements Initializable {
                 }
             });
         } else if (event.getSource() == btnEnviado) {
-            panelContenProdPagados.setVisible(!panelContenProdPagados.isVisible());
+            pane_send_product.setVisible(!pane_send_product.isVisible());
             PmenuP.setVisible(false);
             Pmenu.setVisible(false);
             PmenuE.setVisible(false);
-            scrollPane.setVisible(false);
-            scrollPane01.setVisible(false);
+            pane_car_shop.setVisible(false);
 
         } else if (event.getSource() == btnCambC) {
 
+        } else if (event.getSource() == btn_back) {
         }
     }
 
@@ -642,10 +725,11 @@ public class Controller_View_Catalog_Home implements Initializable {
 
     @FXML
     private void pVisible(MouseEvent event) {
-    }
-
-    @FXML
-    private void mostrarProducto(MouseEvent event) {
+        PmenuP.setVisible(false);
+        Pmenu.setVisible(false);
+        PmenuE.setVisible(false);
+        pane_car_shop.setVisible(false);
+        pane_send_product.setVisible(false);
     }
 
     @FXML
@@ -654,14 +738,40 @@ public class Controller_View_Catalog_Home implements Initializable {
         Pane pane = (Pane) button.getParent();
         Product product = (Product) pane.getUserData();
 
-        try {
-            String url = product.getUrls_images().get(0);
-            String urlLocal = System.getProperty("user.dir") + "\\" + url;
-            File file = Paths.get(urlLocal).toFile();
-            process_product(product, new Image(new FileInputStream(file)));
-        } catch (FileNotFoundException e) {
-            Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
+        if (search_size(pane, product)) {
+            try {
+                String url = product.getUrls_images().get(0);
+                String urlLocal = System.getProperty("user.dir") + "\\" + url;
+                File file = Paths.get(urlLocal).toFile();
+                product.setEmail_buyer(labelUser.getText());
+                process_product(product, new Image(new FileInputStream(file)));
+
+                stacks_products.getProducts_carShop().add(product);
+                stacks_products.saveCarShop();
+            } catch (FileNotFoundException e) {
+                Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
+            alert.setTitle("Información");
+            alert.setHeaderText("Ojo -_-");
+            alert.setContentText("¡Antes de agregar al carrito debes elegir una talla...!");
+            alert.show();
         }
     }
 
+    private boolean search_size(Pane pane, Product product) {
+        ComboBox<String> cmb = (ComboBox<String>) pane.lookup(".combo-box");
+        if (cmb != null) {
+            if (cmb.getValue() != null) {
+                product.setSize(cmb.getValue());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @FXML
+    private void show_product(MouseEvent event) {
+    }
 }

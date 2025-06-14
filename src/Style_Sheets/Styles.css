@@ -39,8 +39,8 @@
 .style-items{
     -fx-background-color: #f0f0f0;
     -fx-text-fill: #000000;
-    -fx-font-size: 12px;    
-    -fx-pref-height: 40px;      
+    -fx-font-size: 12px;
+    -fx-pref-height: 40px;
     -fx-border-width: 1;
     -fx-border-color: #ccc;
     -fx-cursor: hand;
@@ -103,6 +103,15 @@
 .btn-add{
     -fx-background-color: #D3D3D3;
     -fx-background-radius: 10;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+
+.btn-remove{
+    -fx-background-color: #E23D30;
+    -fx-background-radius: 10;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
 }
 
 .btn-add .text {
@@ -153,9 +162,11 @@
 }
 
 .grid-car{
+    -fx-background-radius: 10px;
     -fx-border-color: #333;
-    -fx-border-width: 2;
-    -fx-padding: 2 2 2 2;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-padding: 2px;
     -fx-hgap: 5px;
 }
 

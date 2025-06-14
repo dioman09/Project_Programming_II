@@ -16,13 +16,11 @@ public class Stacks_Products {
 
     private final Stack<Product> products_carShop;
     private final Stack<Product> products_purchaseHistory;
-    private final Stack<Product> products_shipped;
     private final Stack<Product> products_all;
 
     public Stacks_Products() {
         this.products_carShop = new Stack<>();
         this.products_purchaseHistory = new Stack<>();
-        this.products_shipped = new Stack<>();
         this.products_all = new Stack<>();
     }
 
@@ -32,10 +30,6 @@ public class Stacks_Products {
 
     public Stack<Product> getProducts_purchaseHistory() {
         return products_purchaseHistory;
-    }
-
-    public Stack<Product> getProducts_shipped() {
-        return products_shipped;
     }
 
     public Stack<Product> getProducts_all() {
@@ -136,10 +130,10 @@ public class Stacks_Products {
             System.out.println("Catálogo generado exitosamente");
         } catch (IOException e) {
             System.err.println("Error al generar el catálogo: " + e.getMessage());
-            e.printStackTrace();
+            Logger.getLogger(Stacks_Products.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     public void saveCarShop() {
         saveStackToFile(products_carShop, "Data_carShop.txt");
     }
@@ -156,19 +150,17 @@ public class Stacks_Products {
         loadStackFromFile(products_purchaseHistory, "Data_history.txt");
     }
 
-    public void saveShipped() {
-        saveStackToFile(products_shipped, "Data_shipped.txt");
-    }
-
-    public void loadShipped() {
-        loadStackFromFile(products_shipped, "Data_shipped.txt");
-    }
-
     public void saveAll() {
         saveStackToFile(products_all, "Data_products.txt");
     }
 
     public void loadAll() {
         loadStackFromFile(products_all, "Data_products.txt");
+    }
+    
+    public void load() {
+        loadAll();
+        loadCarShop();
+        loadPurchaseHistory();
     }
 }

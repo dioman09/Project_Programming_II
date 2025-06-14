@@ -45,7 +45,7 @@ public class Product {
     public String getDate_purchase_formatt(LocalDateTime localDateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = formatter.format(localDateTime);
-        
+
         return date;
     }
 
@@ -122,12 +122,13 @@ public class Product {
     }
 
     public String toFileString() {
-        if (date_purchase == null) {
-            throw new IllegalStateException("La fecha de compra es null");
-        }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String date = formatter.format(date_purchase);
+        String date = "NULL";
+        
+        if (date_purchase != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            date = formatter.format(date_purchase);
+        }
 
         return String.join("|",
                 date,

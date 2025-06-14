@@ -11,11 +11,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -38,7 +38,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img1" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img1" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -89,7 +89,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img5" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img5" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -140,7 +140,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img2" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="249.0" styleClass="panel-view">
+                  <Pane fx:id="img2" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="249.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -191,7 +191,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img3" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img3" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -242,7 +242,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img4" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img4" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -293,7 +293,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img6" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img6" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -344,7 +344,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img7" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img7" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -395,7 +395,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img8" layoutX="7.0" layoutY="7.0" onMouseClicked="#mostrarProducto" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img8" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -445,9 +445,9 @@
       </GridPane>
       <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#pVisible" prefHeight="50.0" prefWidth="726.0" styleClass="linear-To-Right" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane fx:id="scrollPane01" layoutX="732.0" layoutY="45.0" prefHeight="455.0" prefWidth="375.0" visible="false">
+            <Pane fx:id="pane_car_shop" layoutX="732.0" layoutY="45.0" prefHeight="455.0" prefWidth="375.0" style="-fx-border-color: black; -fx-background-color: whitesmoke; -fx-border-width: 2px;" visible="false">
                <children>
-                  <HBox alignment="CENTER" prefHeight="77.0" prefWidth="375.0" spacing="4.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 4;" styleClass="panelUser">
+                  <HBox alignment="CENTER" prefHeight="77.0" prefWidth="375.0" spacing="4.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;">
                      <children>
                         <Button fx:id="btnPagarProduct" mnemonicParsing="false" onAction="#realizarPago" prefHeight="25.0" prefWidth="246.0" styleClass="btn-add" text="PAGAR PRODUCTOS">
                            <cursor>
@@ -457,23 +457,26 @@
                         <TextField fx:id="txtTotal" editable="false" prefHeight="25.0" prefWidth="82.0" promptText="\$$$$$$" />
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="scrollPane" focusTraversable="false" layoutY="74.0" prefHeight="394.0" prefWidth="375.0" visible="false">
+                  <ScrollPane focusTraversable="false" hbarPolicy="NEVER" layoutX="3.0" layoutY="78.0" prefHeight="373.0" prefWidth="366.0" vbarPolicy="NEVER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <content>
-                        <AnchorPane prefHeight="373.0" prefWidth="367.0">
+                        <AnchorPane prefHeight="567.0" prefWidth="367.0" style="-fx-background-color: whitesmoke;">
                            <children>
-                              <VBox fx:id="panelContenCarrito" alignment="TOP_RIGHT" layoutX="-2.0" layoutY="-2.0" prefHeight="394.0" prefWidth="375.0" style="-fx-background-color: whitesmoke; -fx-border-color: black; -fx-border-width: 4;" styleClass="fondoCarro" />
+                              <FlowPane fx:id="conten_elements_car" alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="373.0" prefWidth="372.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" top="10.0" />
+                                 </padding>
+                              </FlowPane>
                            </children>
                         </AnchorPane>
                      </content>
                   </ScrollPane>
                </children>
             </Pane>
-            <Pane fx:id="panelContenProdPagados" layoutX="675.0" layoutY="46.0" prefHeight="451.0" prefWidth="372.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3px;" visible="false">
+            <Pane fx:id="pane_send_product" layoutX="675.0" layoutY="46.0" prefHeight="451.0" prefWidth="372.0" style="-fx-border-color: black; -fx-background-color: whitesmoke; -fx-border-width: 2px;" visible="false">
                <children>
-                  <VBox fx:id="contenPagados" layoutY="51.0" prefHeight="400.0" prefWidth="372.0" styleClass="fondoCarro" />
                   <Pane prefHeight="53.0" prefWidth="372.0" style="-fx-background-color: #ffa69e; -fx-border-color: #333; -fx-border-width: 2;">
                      <children>
                         <Text layoutX="110.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado de Compras">
@@ -483,11 +486,24 @@
                         </Text>
                      </children>
                   </Pane>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="2.0" layoutY="53.0" prefHeight="394.0" prefWidth="366.0" vbarPolicy="NEVER">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="564.0" prefWidth="365.0">
+                           <children>
+                              <FlowPane fx:id="container_purchase_state" alignment="TOP_CENTER" orientation="VERTICAL" prefHeight="394.0" prefWidth="366.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </FlowPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
                </children>
             </Pane>
-            <Button fx:id="btnGen" layoutX="4.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="nav-button-catalog" text="GENERO" />
-            <Button fx:id="btnExp" layoutX="111.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="nav-button-catalog" text="EXPORTAR" />
-            <Pane fx:id="Pmenu" layoutX="5.0" layoutY="50.0" prefHeight="77.0" prefWidth="200.0" style="-fx-background-color: none;" visible="false">
+            <Button fx:id="btnGen" layoutX="64.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="nav-button-catalog" text="GENERO" />
+            <Button fx:id="btnExp" layoutX="171.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionEvent" styleClass="nav-button-catalog" text="EXPORTAR" />
+            <Pane fx:id="Pmenu" layoutX="65.0" layoutY="50.0" prefHeight="77.0" prefWidth="200.0" style="-fx-background-color: none;" visible="false">
                <children>
                   <Button fx:id="btn_cat_fem" layoutY="3.0" mnemonicParsing="false" onAction="#toogle_catalog" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="FEMENINO">
                      <cursor>
@@ -501,7 +517,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="PmenuE" layoutX="110.0" layoutY="50.0" prefHeight="69.0" prefWidth="200.0" style="-fx-background-color: #38B2AC;" visible="false">
+            <Pane fx:id="PmenuE" layoutX="170.0" layoutY="50.0" prefHeight="69.0" prefWidth="200.0" style="-fx-background-color: #38B2AC;" visible="false">
                <children>
                   <Button fx:id="btnExFem" mnemonicParsing="false" onAction="#actionEvent" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="CATALOGO FEMENINO">
                      <cursor>
@@ -556,6 +572,15 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <Button fx:id="btn_back" layoutX="7.0" layoutY="5.0" mnemonicParsing="false" onAction="#actionEvent" style="-fx-background-color: none;" visible="false">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Publics/Arrow_back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="PmenuP" layoutX="808.0" layoutY="48.0" prefHeight="69.0" prefWidth="200.0" style="-fx-background-color: #38B2AC;" visible="false">

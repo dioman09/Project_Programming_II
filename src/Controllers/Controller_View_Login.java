@@ -2,6 +2,8 @@ package Controllers;
 
 import Data_Structures.Circular_List_Users;
 import Data_Structures.Data_Singleton;
+import Models.Admin;
+import Models.Client;
 import Models.User;
 import java.io.IOException;
 import java.net.URL;
@@ -106,7 +108,7 @@ public class Controller_View_Login implements Initializable {
             event.consume();
         }
     }
-    
+
     @FXML
     private void eventAction(ActionEvent event) {
 
@@ -143,6 +145,20 @@ public class Controller_View_Login implements Initializable {
 
             if (search != null) {
 
+                if (ima_admin.isVisible() && search instanceof Client) {
+                    list_users.Alert(Alert.AlertType.CONFIRMATION, "Ojo -_-", "Acceso denegado\nDebe iniciar con una cuenta de administrador..!");
+                    txt_email.clear();
+                    txt_password.clear();
+                    txt_email.requestFocus();
+                    return;
+                } else if (ima_user.isVisible() && search instanceof Admin) {
+                    list_users.Alert(Alert.AlertType.CONFIRMATION, "Ojo -_-", "Acceso denegado\nDebe iniciar con una cuenta de cliente..!");
+                    txt_email.clear();
+                    txt_password.clear();
+                    txt_email.requestFocus();
+                    return;
+                }
+
                 if ((search.getPassword()).equals(txt_password.getText())) {
 
                     list_users.Alert(Alert.AlertType.CONFIRMATION, "Bienvenido", "NIKE-STORE LE DA LA BIENVENIDA..!");
@@ -159,8 +175,9 @@ public class Controller_View_Login implements Initializable {
 
                         stage.setOnShown((WindowEvent event) -> {
                             controller.getLabelUser().setText(txt_email.getText());
-                            controller.associate_products_pane(search.getSex());   
+                            controller.associate_products_pane(search.getSex());
                             controller.isAdmin();
+                            controller.load_products();
                         });
 
                         stage.setOnCloseRequest((WindowEvent value) -> {
