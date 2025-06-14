@@ -31,6 +31,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -38,6 +40,8 @@ public class Controller_View_Catalog_Home implements Initializable {
 
     private final Stacks_Products stacks_products = Data_Singleton.getInstance().getStacks();
     private final Circular_List_Users list_users = Data_Singleton.getInstance().getList_users();
+    private ObservableList<File> images_games;
+    private int index = 0;
 
     @FXML
     private Pane pane_car_shop;
@@ -245,6 +249,24 @@ public class Controller_View_Catalog_Home implements Initializable {
     private TableColumn<Product, LocalDateTime> col6;
     @FXML
     private BorderPane panel_history;
+    @FXML
+    private Pane panel_details_product;
+    @FXML
+    private ImageView image_primary_product;
+    @FXML
+    private VBox container_miniatures;
+    @FXML
+    private Button rigth;
+    @FXML
+    private Button left;
+    @FXML
+    private TextFlow txt_description;
+    @FXML
+    private Label label_name;
+    @FXML
+    private ComboBox<String> cmb_size_details;
+    @FXML
+    private Button btn_add_details;
 
     /**
      *
@@ -253,13 +275,15 @@ public class Controller_View_Catalog_Home implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        images_games = FXCollections.observableArrayList();
+
         col1.setCellValueFactory(new PropertyValueFactory<>("id"));
         col2.setCellValueFactory(new PropertyValueFactory<>("brand"));
         col3.setCellValueFactory(new PropertyValueFactory<>("name"));
         col4.setCellValueFactory(new PropertyValueFactory<>("price"));
         col4.setCellFactory(tc -> new FormattedTableCell<>("%,.2f"));
         col5.setCellValueFactory(new PropertyValueFactory<>("email_buyer"));
-        col6.setCellValueFactory(new PropertyValueFactory<>("date_purchase"));        
+        col6.setCellValueFactory(new PropertyValueFactory<>("date_purchase"));
     }
 
     /**
@@ -291,6 +315,73 @@ public class Controller_View_Catalog_Home implements Initializable {
                 setText(String.format(format, item));
             }
         }
+    }
+
+    private void load_image_primary() {
+        index = 0;
+        Product product = (Product) image_primary_product.getUserData();
+        images_games.clear();
+        for (String url : product.getUrls_images()) {
+            String url_local = System.getProperty("user.dir") + "\\" + url;
+            File file = Paths.get(url_local).toFile();
+
+            if (file != null) {
+                images_games.add(file);
+            }
+        }
+        try {
+            File file = images_games.get(index);
+            image_primary_product.setImage(new Image(new FileInputStream(file)));
+            update_miniatures();
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al tratar de actualizar el carrusel", e);
+        }
+
+    }
+
+    private void reload_image_primary() {
+        try {
+            File imagen = images_games.get(index);
+            image_primary_product.setImage(new Image(new FileInputStream(imagen)));
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al tratar de actualizar el carrusel", e);
+        }
+    }
+
+    public void update_miniatures() {
+        try {
+            container_miniatures.getChildren().clear();
+            for (int i = 0; i < images_games.size(); i++) {
+                int finalI = i;
+                ImageView thumb = new ImageView(new Image(new FileInputStream(images_games.get(i))));
+                thumb.setFitWidth(100);
+                thumb.setFitHeight(100);
+                thumb.setPreserveRatio(true);
+                thumb.setStyle("-fx-cursor: hand; -fx-background-radius: 8; -fx-border-radius: 8;");
+                thumb.setOnMouseClicked(e -> {
+                    if (index != finalI) {
+                        index = finalI;
+                        reload_image_primary();
+                    }
+                });
+                container_miniatures.getChildren().add(thumb);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al tratar de cargar miniaturas", ex);
+        }
+    }
+
+    private void load_product(Product product) {
+        label_name.setText(product.getName());
+        btn_back.setVisible(true);
+        String[] sizes = product.getSize().split(",");
+        cmb_size_details.setItems(FXCollections.observableArrayList(sizes));
+        List<Text> list_text = new ArrayList<>();
+        for (String string : product.getDescription().split(", ")) {
+            Text text = new Text(string + "\n");
+            list_text.add(text);
+        }
+        txt_description.getChildren().addAll(list_text);
     }
 
     public Label getLabelUser() {
@@ -481,6 +572,24 @@ public class Controller_View_Catalog_Home implements Initializable {
                                     imageView.setFitHeight(150);
                                     imageView.setLayoutX(10);
                                     imageView.setLayoutY(10);
+                                    imageView.setOnMouseClicked((MouseEvent event) -> {
+                                        ImageView image_view = (ImageView) event.getSource();
+                                        Pane fatherPane = (Pane) image_view.getParent();
+                                        Pane grandFather = (Pane) fatherPane.getParent();
+
+                                        if (grandFather.getUserData() != null) {
+                                            Product product_ = (Product) grandFather.getUserData();
+
+                                            load_product(product_);
+                                            image_primary_product.setUserData(product_);
+                                            load_image_primary();
+
+                                            btnExp.setVisible(false);
+                                            btnGen.setVisible(false);
+                                            container_catalog.setVisible(false);
+                                            panel_details_product.setVisible(true);
+                                        }
+                                    });
                                     paneIma.getChildren().clear();
                                     paneIma.getChildren().add(imageView);
                                 } catch (FileNotFoundException e) {
@@ -698,6 +807,22 @@ public class Controller_View_Catalog_Home implements Initializable {
     }
 
     @FXML
+    private void toggle_action(ActionEvent event) {
+        if (event.getSource() == left) {
+            if (index > 0) {
+                index--;
+                reload_image_primary();
+            }
+
+        } else {
+            if (index < (images_games.size() - 1)) {
+                index++;
+                reload_image_primary();
+            }
+        }
+    }
+
+    @FXML
     private void actionEvent(ActionEvent event) {
 
         if (event.getSource() == btnGen) {
@@ -802,6 +927,11 @@ public class Controller_View_Catalog_Home implements Initializable {
         } else if (event.getSource() == btnCambC) {
 
         } else if (event.getSource() == btn_back) {
+            btn_back.setVisible(false);
+            btnExp.setVisible(true);
+            btnGen.setVisible(true);
+            container_catalog.setVisible(true);
+            panel_details_product.setVisible(false);
         } else if (event.getSource() == btn_deleteH) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
             alert.setContentText("Está apunto de eliminar todo el historial de compras\n"
@@ -872,25 +1002,50 @@ public class Controller_View_Catalog_Home implements Initializable {
         Pane pane = (Pane) button.getParent();
         Product product = (Product) pane.getUserData();
 
-        if (search_size(pane, product)) {
-            try {
-                String url = product.getUrls_images().get(0);
-                String urlLocal = System.getProperty("user.dir") + "\\" + url;
-                File file = Paths.get(urlLocal).toFile();
-                product.setEmail_buyer(labelUser.getText());
-                process_product(product, new Image(new FileInputStream(file)));
+        if (event.getSource() == btn_add_details) {
+            Pane parent = (Pane) btn_add_details.getParent();
+            Product product_ = (Product) image_primary_product.getUserData();
+            if (search_size(parent, product_)) {
+                try {
+                    String url = product_.getUrls_images().get(0);
+                    String urlLocal = System.getProperty("user.dir") + "\\" + url;
+                    File file = Paths.get(urlLocal).toFile();
+                    product_.setEmail_buyer(labelUser.getText());
+                    process_product(product_, new Image(new FileInputStream(file)));
 
-                stacks_products.getProducts_carShop().add(product);
-                stacks_products.saveCarShop();
-            } catch (FileNotFoundException e) {
-                Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
+                    stacks_products.getProducts_carShop().add(product_);
+                    stacks_products.saveCarShop();
+                } catch (FileNotFoundException e) {
+                    Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
+                alert.setTitle("Información");
+                alert.setHeaderText("Ojo -_-");
+                alert.setContentText("¡Antes de agregar al carrito debes elegir una talla...!");
+                alert.show();
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
-            alert.setTitle("Información");
-            alert.setHeaderText("Ojo -_-");
-            alert.setContentText("¡Antes de agregar al carrito debes elegir una talla...!");
-            alert.show();
+            if (search_size(pane, product)) {
+                try {
+                    String url = product.getUrls_images().get(0);
+                    String urlLocal = System.getProperty("user.dir") + "\\" + url;
+                    File file = Paths.get(urlLocal).toFile();
+                    product.setEmail_buyer(labelUser.getText());
+                    process_product(product, new Image(new FileInputStream(file)));
+
+                    stacks_products.getProducts_carShop().add(product);
+                    stacks_products.saveCarShop();
+                } catch (FileNotFoundException e) {
+                    Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
+                alert.setTitle("Información");
+                alert.setHeaderText("Ojo -_-");
+                alert.setContentText("¡Antes de agregar al carrito debes elegir una talla...!");
+                alert.show();
+            }
         }
     }
 
