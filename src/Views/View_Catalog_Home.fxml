@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -443,6 +447,41 @@
             </Pane>
          </children>
       </GridPane>
+      <BorderPane fx:id="panel_history" layoutY="50.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: none;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <center>
+            <AnchorPane prefHeight="623.0" prefWidth="1120.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane layoutX="85.0" layoutY="106.0" prefHeight="42.0" prefWidth="950.0" style="-fx-background-color: none;" styleClass="panelView">
+                     <children>
+                        <Button fx:id="btn_deleteH" layoutX="3.0" layoutY="6.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="37.0" prefWidth="140.0" text="Eliminar Historial">
+                           <styleClass>
+                              <String fx:value="delete" />
+                              <String fx:value="button-history" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btnExpH" layoutX="148.0" layoutY="6.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="37.0" prefWidth="140.0" text="Exportar Historial">
+                           <styleClass>
+                              <String fx:value="export" />
+                              <String fx:value="button-history" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btn_closed" layoutX="863.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="35.0" prefWidth="81.0" styleClass="back-button" text="Cerrar" />
+                     </children>
+                  </Pane>
+                  <TableView fx:id="tableHistory" focusTraversable="false" layoutX="85.0" layoutY="163.0" prefHeight="361.0" prefWidth="949.0">
+                     <columns>
+                        <TableColumn fx:id="col1" prefWidth="100.0" text="ID Producto" />
+                        <TableColumn fx:id="col2" prefWidth="93.0" text="Marca" />
+                        <TableColumn fx:id="col3" prefWidth="190.0" text="Tipo" />
+                        <TableColumn fx:id="col4" prefWidth="92.0" text="Precio" />
+                        <TableColumn fx:id="col5" prefWidth="254.0" text="Comprador" />
+                        <TableColumn fx:id="col6" prefWidth="217.0" text="Fecha Compra" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
       <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#pVisible" prefHeight="50.0" prefWidth="726.0" styleClass="linear-To-Right" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane fx:id="pane_car_shop" layoutX="732.0" layoutY="45.0" prefHeight="455.0" prefWidth="375.0" style="-fx-border-color: black; -fx-background-color: whitesmoke; -fx-border-width: 2px;" visible="false">

@@ -2,6 +2,7 @@ package Data_Structures;
 
 import Models.Product;
 import Models.ProductCatalogExporter;
+import Models.PurchaseHistoryExporter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -127,6 +128,18 @@ public class Stacks_Products {
 
         try {
             exporter.exportCatalogPdf(location, sex);
+            System.out.println("Catálogo generado exitosamente");
+        } catch (IOException e) {
+            System.err.println("Error al generar el catálogo: " + e.getMessage());
+            Logger.getLogger(Stacks_Products.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    public void export_history_pdf(String location) {
+        PurchaseHistoryExporter exporter = new PurchaseHistoryExporter(products_purchaseHistory);
+
+        try {
+            exporter.exportPurchaseHistoryPdf(location);
             System.out.println("Catálogo generado exitosamente");
         } catch (IOException e) {
             System.err.println("Error al generar el catálogo: " + e.getMessage());

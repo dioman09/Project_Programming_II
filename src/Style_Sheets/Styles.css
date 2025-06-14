@@ -34,6 +34,16 @@
     -fx-font-size: 15px;
     -fx-font-family: 'LibreBodoni';
     -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.nav-button-catalog:hover{
+    -fx-pref-width: 102px;
+    -fx-pref-height: 42px;
+}
+
+.nav-button-catalog:pressed{
+    -fx-cursor: closed-hand;
 }
 
 .style-items{
@@ -158,7 +168,12 @@
     -fx-border-radius: 20;
     -fx-background-color: whitesmoke;
     -fx-padding: 0;
+    -fx-cursor: open_hand;
     -fx-overflow: hidden;
+}
+
+.panel-view:pressed{
+    -fx-cursor: closed_hand;
 }
 
 .grid-car{
@@ -214,5 +229,110 @@
     -fx-rotate: 45;
 }
 
+/* Estilo general de la tabla */
+.table-view {
+    -fx-background-color: white;
+    -fx-background-image: url('../Images/Publics/Logo.png');
+    -fx-background-size: inherit;
+    -fx-background-repeat: repeat-x;
+    -fx-background-position: left center;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Encabezados de columna */
+.table-view .column-header-background {
+    -fx-background-color: #e0e0e0;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-padding: 5px 0 5px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 0 1px 0 0;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: #333333;
+}
+
+.table-view .column-header .label{
+    -fx-alignment: CENTER;
+}
+
+/* Celdas de datos */
+.table-view .table-cell {
+    -fx-padding: 8px;
+    -fx-border-color: #eeeeee;
+    -fx-border-width: 0 0 1px 0;
+    -fx-font-size: 11px;
+    -fx-text-fill: #555555;
+    -fx-alignment: CENTER;
+}
+
+/* Filas alternas (opcional) */
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #4285f4;
+    -fx-text-fill: white;
+}
+
+/* Barra de desplazamiento */
+.table-view .scroll-bar:vertical {
+    -fx-background-color: #f5f5f5;
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #cccccc;
+    -fx-background-radius: 5px;
+}
+
+.button-history{
+    -fx-padding: 10px 15px 10px 15px;
+    -fx-border-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.3s;
+}
+
+.button-history:pressed{
+    -fx-cursor: closed_hand;
+}
+
+.delete {
+    -fx-background-color: #FF6B6B;
+    -fx-color: white;
+    -fx-border: none;
+}
+
+.delete:hover {
+    -fx-background-color: #E05A5A;
+}
+
+.export {
+    -fx-background-color: #4ECDC4;
+    -fx-color: white;
+    -fx-border: none;
+}
+
+.export:hover {
+    -fx-background-color: #3DBBB3;
+}
+
+.back-button{
+    -fx-background-color: #FF6B6B;
+    -fx-color: white;
+    -fx-border: none;
+    -fx-font-weight: bold;
+}
+
+.back-button:hover{
+    -fx-background-color: #E05A5A;
+}
 /*View_Catalog_Home*/
 
