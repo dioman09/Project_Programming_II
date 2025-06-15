@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class Controller_View_Arranque implements Initializable {
+public class Controller_View_Arranque extends Application implements Initializable {
 
     private final Circular_List_Users list_users = Data_Singleton.getInstance().getList_users();
     private final Stacks_Products stacks_products = Data_Singleton.getInstance().getStacks();
@@ -125,5 +126,17 @@ public class Controller_View_Arranque implements Initializable {
 
     @FXML
     private void irLink(ActionEvent event) {
+        if (event.getSource() == link_01) {
+            String url = "https://github.com/GAMEHUBPROYECTO/GAMEHUB.git";
+            getHostServices().showDocument(url);
+        }
+        if (event.getSource() == link_02) {
+            String url = "https://w.app/kn6xtm";
+            getHostServices().showDocument(url);
+        }
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
     }
 }

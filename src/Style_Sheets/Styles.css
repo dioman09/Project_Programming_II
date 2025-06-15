@@ -334,5 +334,97 @@
 .back-button:hover{
     -fx-background-color: #E05A5A;
 }
+
+.modal-background {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-container {
+    -fx-background-color: #1E1E1E;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0, 0, 0);
+    -fx-border-radius: 10;
+    -fx-border-color: #2D2D2D;
+    -fx-border-width: 1;
+}
+
+.modal-title {
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.input-section {
+    -fx-padding: 5 0;
+}
+
+.input-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+
+#password_field{
+    -fx-background-color: #2D2D2D;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #808080;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #3D3D3D;
+    -fx-border-width: 1;
+    -fx-padding: 8;
+}
+
+#password_field:focused {
+    -fx-border-color: #007ACC;
+    -fx-background-color: #363636;
+}
+
+.button-primary {
+    -fx-background-color: #007ACC;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.button-primary:hover {
+    -fx-background-color: #0098FF;
+}
+
+.button-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #3D3D3D;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #2D2D2D;
+}
+
+.error-label {
+    -fx-text-fill: #FF4444;
+    -fx-font-size: 12px;
+    -fx-padding: 5 0;
+}
+
+/* Animación para mostrar/ocultar la sección de nueva contraseña */
+.new-password-section {
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.new-password-section.visible {
+    -fx-opacity: 1;
+    -fx-translate-y: 0;
+}
+
+.new-password-section.hidden {
+    -fx-opacity: 0;
+    -fx-translate-y: -20;
+}
 /*View_Catalog_Home*/
 

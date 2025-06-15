@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
@@ -45,8 +46,6 @@ public class Controller_View_Catalog_Home implements Initializable {
 
     @FXML
     private Pane pane_car_shop;
-    @FXML
-    private Button btnPagarProduct;
     @FXML
     private TextField txtTotal;
     @FXML
@@ -267,6 +266,22 @@ public class Controller_View_Catalog_Home implements Initializable {
     private ComboBox<String> cmb_size_details;
     @FXML
     private Button btn_add_details;
+    @FXML
+    private Button btn_buy_product;
+    @FXML
+    private VBox pass_toggle_panel;
+    @FXML
+    private PasswordField current_password_field;
+    @FXML
+    private VBox pass_new_section;
+    @FXML
+    private PasswordField newPasswordField;
+    @FXML
+    private PasswordField confirmPasswordField;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private Button continueButton;
 
     /**
      *
@@ -284,6 +299,72 @@ public class Controller_View_Catalog_Home implements Initializable {
         col4.setCellFactory(tc -> new FormattedTableCell<>("%,.2f"));
         col5.setCellValueFactory(new PropertyValueFactory<>("email_buyer"));
         col6.setCellValueFactory(new PropertyValueFactory<>("date_purchase"));
+    }
+
+    @FXML
+    private void handleCancel(ActionEvent event) {        
+        current_password_field.clear();
+        newPasswordField.clear();
+        confirmPasswordField.clear();
+        errorLabel.setVisible(false);
+        pass_new_section.setVisible(false);
+        pass_toggle_panel.setVisible(false);
+    }
+
+    @FXML
+    private void handleContinue(ActionEvent event) {
+        String currentPassword = current_password_field.getText();
+        String email = labelUser.getText();
+        
+        if (currentPassword.isEmpty()) {
+            showError("Por favor ingrese su contraseña actual");
+            return;
+        }
+
+        User user = list_users.searchByEmail(email);
+        if (user == null) {
+            showError("Usuario no encontrado");
+            return;
+        }
+
+        if (!pass_new_section.isVisible()) {
+            if (!user.getPassword().equals(currentPassword)) {
+                showError("Contraseña actual incorrecta");
+                return;
+            }
+
+            pass_new_section.setVisible(true);
+            continueButton.setText("Guardar");
+            return;
+        }
+        
+        String newPassword = newPasswordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
+        if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            showError("Por favor complete todos los campos");
+            return;
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            showError("Las contraseñas no coinciden");
+            return;
+        }
+
+        if (newPassword.equals(currentPassword)) {
+            showError("La nueva contraseña debe ser diferente a la actual");
+            return;
+        }        
+        user.setPassword(newPassword);           
+        list_users.save();
+        list_users.take();
+        showAlert("Aviso.", "Contaseña cambiada con exito..!");
+        handleCancel(event);
+    }
+
+    private void showError(String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
     }
 
     /**
@@ -399,19 +480,36 @@ public class Controller_View_Catalog_Home implements Initializable {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public void actualizarTabla() {
+        tableHistory.getItems().clear();
+
+        if (!stacks_products.getProducts_purchaseHistory().isEmpty()) {
+
+            for (Product product : stacks_products.getProducts_purchaseHistory()) {
+                tableHistory.getItems().add(product);
+            }
+        }
+    }
+
     public void load_products() {
+        conten_elements_car.getChildren().clear();
+        container_purchase_state.getChildren().clear();
+        float total = 0;
         for (Product product : stacks_products.getProducts_carShop()) {
             if (product.getEmail_buyer().equals(labelUser.getText())) {
                 try {
+                    total += product.getPrice();
                     String urlLocal = System.getProperty("user.dir") + "\\" + product.getUrls_images().get(0);
                     File file = Paths.get(urlLocal).toFile();
-                    process_product_2(product, new Image(new FileInputStream(file)));
+                    process_product(product, new Image(new FileInputStream(file)));
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
                 }
             }
         }
-
+        String total_ = String.format("%,.2f", total);
+        txtTotal.setText("$" + total_);
         for (Product product : stacks_products.getProducts_purchaseHistory()) {
             if (product.getEmail_buyer().equals(labelUser.getText())) {
                 try {
@@ -440,7 +538,7 @@ public class Controller_View_Catalog_Home implements Initializable {
         historyGrid.setMaxSize(375, 394);
 
         ColumnConstraints column = new ColumnConstraints();
-        column.setPrefWidth(container_purchase_state.getWidth() / 3);
+        column.setPrefWidth(container_purchase_state.getWidth() / 2);
         historyGrid.getColumnConstraints().add(column);
 
         historyGrid.setBackground(new Background(new BackgroundFill(Color.WHITESMOKE, null, null)));
@@ -530,83 +628,85 @@ public class Controller_View_Catalog_Home implements Initializable {
     }
 
     public void show_products(String sex) {
-        for (Node node : container_catalog.getChildren()) {
-            if (node instanceof Pane) {
-                Pane pane = (Pane) node;
-                if (pane.getUserData() instanceof Product) {
-                    Product product = (Product) pane.getUserData();
+        Platform.runLater(() -> {
+            for (Node node : container_catalog.getChildren()) {
+                if (node instanceof Pane) {
+                    Pane pane = (Pane) node;
+                    if (pane.getUserData() instanceof Product) {
+                        Product product = (Product) pane.getUserData();
 
-                    for (Node node_ : pane.getChildren()) {
-                        if (node_ instanceof Label) {
-                            Label label = (Label) node_;
-                            for (int a = 1; a < 9; a++) {
-                                if (label.getId().equals("lbl_brand_" + a)) {
-                                    label.setText(product.getBrand());
-                                    break;
-                                }
-                                if (label.getId().equals("lbl_name_" + a)) {
-                                    label.setText(product.getName());
-                                    break;
-                                }
-                                if (label.getId().equals("lbl_sex_" + a)) {
-                                    label.setText(product.getSex());
-                                    break;
-                                }
-                                if (label.getId().equals("lbl_price_" + a)) {
-                                    label.setText(product.getPrice() + "");
-                                    break;
+                        for (Node node_ : pane.getChildren()) {
+                            if (node_ instanceof Label) {
+                                Label label = (Label) node_;
+                                for (int a = 1; a < 9; a++) {
+                                    if (label.getId().equals("lbl_brand_" + a)) {
+                                        label.setText(product.getBrand());
+                                        break;
+                                    }
+                                    if (label.getId().equals("lbl_name_" + a)) {
+                                        label.setText(product.getName());
+                                        break;
+                                    }
+                                    if (label.getId().equals("lbl_sex_" + a)) {
+                                        label.setText(product.getSex());
+                                        break;
+                                    }
+                                    if (label.getId().equals("lbl_price_" + a)) {
+                                        label.setText(product.getPrice() + "");
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (product.getSex().equals(sex)) {
-                            Pane paneIma = (Pane) pane.lookup(".panel-view");
-                            if (paneIma != null) {
-                                try {
-                                    String url = product.getUrls_images().get(0);
-                                    String urlLocal = System.getProperty("user.dir") + "\\" + url;
-                                    File file = Paths.get(urlLocal).toFile();
+                            if (product.getSex().equals(sex)) {
+                                Pane paneIma = (Pane) pane.lookup(".panel-view");
+                                if (paneIma != null) {
+                                    try {
+                                        String url = product.getUrls_images().get(0);
+                                        String urlLocal = System.getProperty("user.dir") + "\\" + url;
+                                        File file = Paths.get(urlLocal).toFile();
 
-                                    ImageView imageView = new ImageView(new Image(new FileInputStream(file)));
-                                    imageView.setFitWidth(230);
-                                    imageView.setFitHeight(150);
-                                    imageView.setLayoutX(10);
-                                    imageView.setLayoutY(10);
-                                    imageView.setOnMouseClicked((MouseEvent event) -> {
-                                        ImageView image_view = (ImageView) event.getSource();
-                                        Pane fatherPane = (Pane) image_view.getParent();
-                                        Pane grandFather = (Pane) fatherPane.getParent();
+                                        ImageView imageView = new ImageView(new Image(new FileInputStream(file)));
+                                        imageView.setFitWidth(230);
+                                        imageView.setFitHeight(150);
+                                        imageView.setLayoutX(10);
+                                        imageView.setLayoutY(10);
+                                        imageView.setOnMouseClicked((MouseEvent event) -> {
+                                            ImageView image_view = (ImageView) event.getSource();
+                                            Pane fatherPane = (Pane) image_view.getParent();
+                                            Pane grandFather = (Pane) fatherPane.getParent();
 
-                                        if (grandFather.getUserData() != null) {
-                                            Product product_ = (Product) grandFather.getUserData();
+                                            if (grandFather.getUserData() != null) {
+                                                Product product_ = (Product) grandFather.getUserData();
 
-                                            load_product(product_);
-                                            image_primary_product.setUserData(product_);
-                                            load_image_primary();
+                                                load_product(product_);
+                                                image_primary_product.setUserData(product_);
+                                                load_image_primary();
 
-                                            btnExp.setVisible(false);
-                                            btnGen.setVisible(false);
-                                            container_catalog.setVisible(false);
-                                            panel_details_product.setVisible(true);
-                                        }
-                                    });
-                                    paneIma.getChildren().clear();
-                                    paneIma.getChildren().add(imageView);
-                                } catch (FileNotFoundException e) {
-                                    Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen", e);
-                                }
+                                                btnExp.setVisible(false);
+                                                btnGen.setVisible(false);
+                                                container_catalog.setVisible(false);
+                                                panel_details_product.setVisible(true);
+                                            }
+                                        });
+                                        paneIma.getChildren().clear();
+                                        paneIma.getChildren().add(imageView);
+                                    } catch (FileNotFoundException e) {
+                                        Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen", e);
+                                    }
 
-                                ComboBox<String> cmb = (ComboBox<String>) pane.lookup(".combo-box");
-                                if (cmb != null) {
-                                    String[] sizes = product.getSize().split(",");
-                                    cmb.setItems(FXCollections.observableArrayList(sizes));
+                                    ComboBox<String> cmb = (ComboBox<String>) pane.lookup(".combo-box");
+                                    if (cmb != null) {
+                                        String[] sizes = product.getSize().split(",");
+                                        cmb.setItems(FXCollections.observableArrayList(sizes));
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
+        });
     }
 
     public void associate_products_pane(String sex) {
@@ -644,21 +744,7 @@ public class Controller_View_Catalog_Home implements Initializable {
 
         GridPane productGrid = setupProductGrid(components);
 
-        setupButtonActions(components, product, productGrid);
-
-        conten_elements_car.getChildren().add(productGrid);
-
-        showSuccessAlert(product);
-    }
-
-    private void process_product_2(Product product, Image image) {
-        if (product == null) {
-            return;
-        }
-
-        ProductUIComponents components = createProductComponents(product, image);
-
-        GridPane productGrid = setupProductGrid(components);
+        productGrid.setUserData(product);
 
         setupButtonActions(components, product, productGrid);
 
@@ -753,6 +839,8 @@ public class Controller_View_Catalog_Home implements Initializable {
         conten_elements_car.getChildren().remove(productGrid);
 
         updateTotalPrice();
+        String price = String.format("%,.2f", product.getPrice());
+        showAlert("Aviso", "Compra realizada con exito\nHa comprado " + product.getName() + "por un valor de $" + price + ".");
     }
 
     private void createPurchaseHistoryItem(Product product, GridPane sourceGrid) {
@@ -794,16 +882,42 @@ public class Controller_View_Catalog_Home implements Initializable {
         txtTotal.setText(total > 0 ? "$" + total : "");
     }
 
-    private void showSuccessAlert(Product product) {
-        showAlert("Aviso", "El " + product.getName() + " agregado exitosamente al carrito de compras.");
-    }
-
     private void showAlert(String title, String message) {
         list_users.Alert(Alert.AlertType.INFORMATION, title, message);
     }
 
     @FXML
-    private void realizarPago(ActionEvent event) {
+    private void buy_products(ActionEvent event) {
+        float total = 0;
+        Alert alert = new Alert(Alert.AlertType.NONE, "Aviso.", ButtonType.OK);
+        if (stacks_products.getProductsByEmail(stacks_products.getProducts_carShop(), labelUser.getText()) == null) {
+            alert.setContentText("Antes de relaizar el pago debe asegurarse de tener productos por comprar.");
+            alert.show();
+            return;
+        }
+
+        for (Node node : conten_elements_car.getChildren()) {
+            GridPane grid = (GridPane) node;
+            if (grid.getUserData() != null) {
+
+                Product product = (Product) grid.getUserData();
+                total += product.getPrice();
+                LocalDateTime date_purchase = LocalDateTime.now();
+                if (stacks_products.getProducts_carShop().contains(product)) {
+                    stacks_products.getProducts_carShop().remove(product);
+                    stacks_products.saveCarShop();                    
+                }
+                product.setDate_purchase(date_purchase);
+                stacks_products.getProducts_purchaseHistory().add(product);
+                stacks_products.savePurchaseHistory();
+                actualizarTabla();
+            }
+        }
+        load_products();
+        updateTotalPrice();
+        String total_ = String.format("%,.2f", total);
+        alert.setContentText("Gracias por realizar su compra, el total fue de " + total_);
+        alert.show();
     }
 
     @FXML
@@ -873,28 +987,7 @@ public class Controller_View_Catalog_Home implements Initializable {
                 pane_car_shop.setVisible(false);
             }
         } else if (event.getSource() == btnCarro) {
-            double t = 0;
-            for (int i = 0; i < conten_elements_car.getChildren().size(); i++) {
-                if (conten_elements_car.getChildren().get(i) instanceof GridPane) {
-
-                    GridPane gridPane = (GridPane) conten_elements_car.getChildren().get(i);
-
-                    Node dato = get_node_whit_gridPane(gridPane, 1, 1);
-
-                    Label precio = (Label) dato;
-
-                    double p = Double.parseDouble(precio.getText());
-
-                    txtTotal.setText("$" + (p + t));
-                    String[] to = txtTotal.getText().split("\\$");
-                    t = Double.parseDouble(to[1]);
-                }
-            }
-
-            if (conten_elements_car.getChildren().isEmpty()) {
-                txtTotal.setText("");
-            }
-
+            load_products();
             pane_send_product.setVisible(!pane_send_product.isVisible());
             pane_car_shop.setVisible(!pane_car_shop.isVisible());
             PmenuP.setVisible(false);
@@ -918,14 +1011,14 @@ public class Controller_View_Catalog_Home implements Initializable {
                 }
             });
         } else if (event.getSource() == btnEnviado) {
+            load_products();
             pane_send_product.setVisible(!pane_send_product.isVisible());
             PmenuP.setVisible(false);
             Pmenu.setVisible(false);
             PmenuE.setVisible(false);
             pane_car_shop.setVisible(false);
-
         } else if (event.getSource() == btnCambC) {
-
+            pass_toggle_panel.setVisible(true);
         } else if (event.getSource() == btn_back) {
             btn_back.setVisible(false);
             btnExp.setVisible(true);
@@ -1002,6 +1095,7 @@ public class Controller_View_Catalog_Home implements Initializable {
         Pane pane = (Pane) button.getParent();
         Product product = (Product) pane.getUserData();
 
+        Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
         if (event.getSource() == btn_add_details) {
             Pane parent = (Pane) btn_add_details.getParent();
             Product product_ = (Product) image_primary_product.getUserData();
@@ -1015,11 +1109,16 @@ public class Controller_View_Catalog_Home implements Initializable {
 
                     stacks_products.getProducts_carShop().add(product_);
                     stacks_products.saveCarShop();
+                    alert.setAlertType(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Información");
+                    alert.setHeaderText("Listo..!");
+                    alert.setContentText("¡Producto agregado al carrito de forma exitosa...!");
+                    alert.show();
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
                 }
             } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
+
                 alert.setTitle("Información");
                 alert.setHeaderText("Ojo -_-");
                 alert.setContentText("¡Antes de agregar al carrito debes elegir una talla...!");
@@ -1036,11 +1135,16 @@ public class Controller_View_Catalog_Home implements Initializable {
 
                     stacks_products.getProducts_carShop().add(product);
                     stacks_products.saveCarShop();
+                    alert.setAlertType(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Información");
+                    alert.setHeaderText("Listo..!");
+                    alert.setContentText("¡Producto agregado al carrito de forma exitosa...!");
+                    alert.show();
                 } catch (FileNotFoundException e) {
                     Logger.getLogger(Controller_View_Catalog_Home.class.getName()).log(Level.SEVERE, "Error al cargar imagen del producto.", e);
                 }
             } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
+
                 alert.setTitle("Información");
                 alert.setHeaderText("Ojo -_-");
                 alert.setContentText("¡Antes de agregar al carrito debes elegir una talla...!");
@@ -1058,21 +1162,5 @@ public class Controller_View_Catalog_Home implements Initializable {
             }
         }
         return false;
-    }
-
-    @FXML
-    private void show_product(MouseEvent event) {
-    }
-
-    @SuppressWarnings("unchecked")
-    public void actualizarTabla() {
-        tableHistory.getItems().clear();
-
-        if (!stacks_products.getProducts_purchaseHistory().isEmpty()) {
-
-            for (Product product : stacks_products.getProducts_purchaseHistory()) {
-                tableHistory.getItems().add(product);
-            }
-        }
     }
 }

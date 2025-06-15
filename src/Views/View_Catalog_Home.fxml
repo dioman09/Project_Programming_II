@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -44,7 +45,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img1" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img1" layoutX="7.0" layoutY="7.0" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -95,7 +96,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img5" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img5" layoutX="7.0" layoutY="7.0" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -146,7 +147,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img2" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="249.0" styleClass="panel-view">
+                  <Pane fx:id="img2" layoutX="7.0" layoutY="7.0" prefHeight="170.0" prefWidth="249.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -197,7 +198,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img3" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img3" layoutX="7.0" layoutY="7.0" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -248,7 +249,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img4" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img4" layoutX="7.0" layoutY="7.0" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -299,7 +300,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img6" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img6" layoutX="7.0" layoutY="7.0" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -350,7 +351,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img7" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img7" layoutX="7.0" layoutY="7.0" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -401,7 +402,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
                <children>
-                  <Pane fx:id="img8" layoutX="7.0" layoutY="7.0" onMouseClicked="#show_product" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
+                  <Pane fx:id="img8" layoutX="7.0" layoutY="7.0" prefHeight="170.0" prefWidth="250.0" styleClass="panel-view">
                      <padding>
                         <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                      </padding>
@@ -449,41 +450,6 @@
             </Pane>
          </children>
       </GridPane>
-      <BorderPane fx:id="panel_history" layoutY="50.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: none;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-         <center>
-            <AnchorPane prefHeight="623.0" prefWidth="1120.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane layoutX="85.0" layoutY="106.0" prefHeight="42.0" prefWidth="950.0" style="-fx-background-color: none;" styleClass="panelView">
-                     <children>
-                        <Button fx:id="btn_deleteH" layoutX="3.0" layoutY="6.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="37.0" prefWidth="140.0" text="Eliminar Historial">
-                           <styleClass>
-                              <String fx:value="delete" />
-                              <String fx:value="button-history" />
-                           </styleClass>
-                        </Button>
-                        <Button fx:id="btnExpH" layoutX="148.0" layoutY="6.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="37.0" prefWidth="140.0" text="Exportar Historial">
-                           <styleClass>
-                              <String fx:value="export" />
-                              <String fx:value="button-history" />
-                           </styleClass>
-                        </Button>
-                        <Button fx:id="btn_closed" layoutX="863.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="35.0" prefWidth="81.0" styleClass="back-button" text="Cerrar" />
-                     </children>
-                  </Pane>
-                  <TableView fx:id="tableHistory" focusTraversable="false" layoutX="85.0" layoutY="163.0" prefHeight="361.0" prefWidth="949.0">
-                     <columns>
-                        <TableColumn fx:id="col1" prefWidth="100.0" text="ID Producto" />
-                        <TableColumn fx:id="col2" prefWidth="93.0" text="Marca" />
-                        <TableColumn fx:id="col3" prefWidth="190.0" text="Tipo" />
-                        <TableColumn fx:id="col4" prefWidth="92.0" text="Precio" />
-                        <TableColumn fx:id="col5" prefWidth="254.0" text="Comprador" />
-                        <TableColumn fx:id="col6" prefWidth="217.0" text="Fecha Compra" />
-                     </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-         </center>
-      </BorderPane>
       <Pane fx:id="panel_details_product" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <Pane layoutX="250.0" layoutY="55.0" prefHeight="366.0" prefWidth="682.0" style="-fx-background-color: #CACACA; -fx-background-radius: 20;">
@@ -531,7 +497,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="77.0" prefWidth="375.0" spacing="4.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;">
                      <children>
-                        <Button fx:id="btnPagarProduct" mnemonicParsing="false" onAction="#realizarPago" prefHeight="25.0" prefWidth="246.0" styleClass="btn-add" text="PAGAR PRODUCTOS">
+                        <Button fx:id="btn_buy_product" mnemonicParsing="false" onAction="#buy_products" prefHeight="25.0" prefWidth="246.0" styleClass="btn-add" text="PAGAR PRODUCTOS">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -665,6 +631,41 @@
             </Button>
          </children>
       </Pane>
+      <BorderPane fx:id="panel_history" layoutY="50.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: none;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <center>
+            <AnchorPane prefHeight="623.0" prefWidth="1120.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane layoutX="85.0" layoutY="106.0" prefHeight="42.0" prefWidth="950.0" style="-fx-background-color: none;" styleClass="panelView">
+                     <children>
+                        <Button fx:id="btn_deleteH" layoutX="3.0" layoutY="6.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="37.0" prefWidth="140.0" text="Eliminar Historial">
+                           <styleClass>
+                              <String fx:value="delete" />
+                              <String fx:value="button-history" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btnExpH" layoutX="148.0" layoutY="6.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="37.0" prefWidth="140.0" text="Exportar Historial">
+                           <styleClass>
+                              <String fx:value="export" />
+                              <String fx:value="button-history" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btn_closed" layoutX="863.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionEvent" prefHeight="35.0" prefWidth="81.0" styleClass="back-button" text="Cerrar" />
+                     </children>
+                  </Pane>
+                  <TableView fx:id="tableHistory" focusTraversable="false" layoutX="85.0" layoutY="163.0" prefHeight="361.0" prefWidth="949.0">
+                     <columns>
+                        <TableColumn fx:id="col1" prefWidth="100.0" text="ID Producto" />
+                        <TableColumn fx:id="col2" prefWidth="93.0" text="Marca" />
+                        <TableColumn fx:id="col3" prefWidth="190.0" text="Tipo" />
+                        <TableColumn fx:id="col4" prefWidth="92.0" text="Precio" />
+                        <TableColumn fx:id="col5" prefWidth="254.0" text="Comprador" />
+                        <TableColumn fx:id="col6" prefWidth="217.0" text="Fecha Compra" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
       <Pane fx:id="PmenuP" layoutX="808.0" layoutY="48.0" prefHeight="69.0" prefWidth="200.0" style="-fx-background-color: #38B2AC;" visible="false">
          <children>
             <Button fx:id="btnCerrarS" mnemonicParsing="false" onAction="#actionEvent" prefHeight="33.0" prefWidth="200.0" styleClass="style-items" text="CERRAR SESIÓN">
@@ -679,5 +680,37 @@
             </Button>
          </children>
       </Pane>
+      <VBox fx:id="pass_toggle_panel" layoutX="420.0" layoutY="130.0" maxWidth="350.0" minWidth="300.0" prefHeight="401.0" prefWidth="350.0" spacing="10.0" styleClass="modal-container" visible="false">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
+        
+        <!-- Header -->
+        <Text styleClass="modal-title" text="Cambiar Contraseña" />
+        
+        <!-- Current Password Section -->
+        <VBox spacing="10" styleClass="input-section">
+            <Label styleClass="input-label" text="Contraseña Actual" />
+            <PasswordField id="password_field" fx:id="current_password_field" promptText="Ingrese su contraseña actual" />
+        </VBox>
+        
+        <!-- New Password Section (Initially Hidden) -->
+        <VBox fx:id="pass_new_section" prefHeight="151.0" prefWidth="258.0" spacing="10" styleClass="input-section" visible="false">
+            <Label styleClass="input-label" text="Nueva Contraseña" />
+            <PasswordField id="password_field" fx:id="newPasswordField" promptText="Ingrese su nueva contraseña" />
+            
+            <Label styleClass="input-label" text="Confirmar Nueva Contraseña" />
+            <PasswordField id="password_field" fx:id="confirmPasswordField" promptText="Confirme su nueva contraseña" />
+        </VBox>
+        
+        <!-- Error Message -->
+        <Label fx:id="errorLabel" styleClass="error-label" visible="false" />
+        
+        <!-- Buttons -->
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <Button onAction="#handleCancel" styleClass="button-secondary" text="Cancelar" />
+            <Button fx:id="continueButton" onAction="#handleContinue" styleClass="button-primary" text="Continuar" />
+        </HBox>
+    </VBox>
    </children>
 </AnchorPane>
