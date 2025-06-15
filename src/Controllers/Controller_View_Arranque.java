@@ -127,7 +127,7 @@ public class Controller_View_Arranque extends Application implements Initializab
     @FXML
     private void irLink(ActionEvent event) {
         if (event.getSource() == link_01) {
-            String url = "https://github.com/GAMEHUBPROYECTO/GAMEHUB.git";
+            String url = "https://github.com/dioman09/Project_Programming_II.git";
             getHostServices().showDocument(url);
         }
         if (event.getSource() == link_02) {
